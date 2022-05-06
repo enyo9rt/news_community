@@ -1,0 +1,82 @@
+* {
+    font-family: 'Do Hyeon', sans-serif;
+}
+.back_icon {
+    margin: 40px 0 0 50px;
+    transform:scale(2);
+    color: black;
+}
+.back_icon:hover {
+    color: #007afe;
+}
+.wrap {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    margin: auto;
+    justify-content: center;
+}
+.top_contents {
+    margin: auto;
+    width: auto;
+}
+.image {
+    width: 500px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+}
+.image > img {
+    positon: absoulte;
+    width: 100%;
+    top: 50%;, left: 50%;, transform: translate(-50%, -50%);
+}
+.top_main {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+.top_main > h1 {
+    margin-top: 20px;
+}
+.top_sub {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.like_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.like_icon {
+    margin: 10px 10px 5px 7px;
+    transform:scale(1.5);
+    color: #007afe;
+}
+.like_result {
+    margin-top: 10px;
+}
+.new_like {
+    margin-top: 10px;
+}
+.comment_submit_container {
+    width: 500px;
+}
+.comment_button {
+    width: 100px;
+    height: 50px;
+    font-size: 1.1rem;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.comments_table {
+    width: 800px;
+    margin: 90px auto;
+}

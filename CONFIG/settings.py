@@ -1,0 +1,5 @@
+POLITICS = 'https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=100'
+ECONOMY = 'https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=101'
+SOCIETY = 'https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=102'
+SCIENCE = 'https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=105'
+WORLD = 'https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=104'
