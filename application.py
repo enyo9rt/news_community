@@ -5,21 +5,21 @@ from dev_module import weather
 from DB_ADMIN import account
 from dev_module.comments import comments
 
-app = Flask(__name__)
+application = Flask(__name__)
 # weather.py 파일로 날씨 관련 api 분리 후 가져오기
-app.register_blueprint(weather.weather_api)
-app.register_blueprint(comments)
+application.register_blueprint(weather.weather_api)
+application.register_blueprint(comments)
 
 client = MongoClient(account.API_KEY)
 db = client.Haromony
 
 
-@app.route('/')
+@application.route('/')
 def home():
     return render_template('index.html')
 
 
-@app.route("/subscription", methods=["POST"])
+@application.route("/subscription", methods=["POST"])
 def subscription():
     """
     뉴스 구독 정보(뉴스 종류, 전송 시간, user_email)를 subscription admin 컬렉션에 저장
@@ -36,7 +36,7 @@ def subscription():
     return jsonify({'msg': '구독 완료'})
 
 
-@app.route("/news", methods=["GET"])
+@application.route("/news", methods=["GET"])
 def news_get():
     """
     DB의 news_log 컬렉션에서 뉴스 정보를 가져오기
@@ -48,4 +48,4 @@ def news_get():
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    application.run('0.0.0.0', port=5000, debug=True)
