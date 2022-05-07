@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from pymongo import MongoClient
 from dev_module import news_getter
 from dev_module import weather
@@ -18,7 +18,14 @@ SECRET_KEY = 'test'
 
 @application.route('/')
 def home():
-    return render_template('index.html')
+    token_receive = request.cookies.get('mytoken')  # 클라이언트로부터 mytoekn에 담겨 온 토큰 정보 받아주기
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        status = True
+        return render_template('index.html', status=status)
+    except :
+        status = False
+        return render_template('index.html', status=status)
 
 
 @application.route("/news", methods=["GET"])
@@ -35,20 +42,34 @@ def news_get():
 @application.route('/fake_signin', methods=['POST'])
 def fake_sign_in():
     # 로그인
-    username_receive = 'test_id'
-    result = db.users.find_one({'username': username_receive})
-
+    # username_receive = 'test_id'
+    result = db.users.find_one({'id': 'test_id'})
+    print(result)
     if result is not None:
         payload = {
-         'id': username_receive,
+         'id': 'test_id',
          'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').encode().decode('utf-8')
-
+        print(f'token_content: {token}')
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '똥'})
+
+
+@application.route('/user/<username>')
+def user(username):
+    # 각 사용자의 프로필과 글을 모아볼 수 있는 공간
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        status = (username == payload["id"])  # 내 프로필이면 True, 다른 사람 프로필 페이지면 False
+
+        user_info = db.users.find_one({"username": username}, {"_id": False})
+        return render_template('user.html', user_info=user_info, status=status)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
 
 if __name__ == '__main__':
