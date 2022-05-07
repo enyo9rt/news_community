@@ -16,6 +16,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <script>
+        const fake_login = () =>{
+            console.log('test')
+            $.ajax({
+                type: "POST",
+                url: "/fake_signin",
+                data: {
+                    username_give: 'test_id',
+                },
+                success: function (response) {
+                    alert("test 로그인에 성공, 로그 아웃은 쿠키를 직접 지우세요")
+                    window.location.replace("/")
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -23,7 +40,7 @@
     <div class="inner">
       <div class="head-container">
         <div class="head-brand"><a href="/">Team. harmony</a></div>
-          <button class = 'test_login'>가짜 로그인</button>
+          <button class = 'test_login' onclick="fake_login()">가짜 로그인</button>
       </div>
     </div>
   </header>
