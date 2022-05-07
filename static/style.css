@@ -187,13 +187,6 @@ a:hover {
 .head-container .head-brand {
   font-weight: bold;
   padding: 0.5rem;
-  background-color: #FFD432;
-  font-size: 1.2rem;
-}
-
-.head-container .head-blog {
-  font-weight: bold;
-  padding: 0.5rem;
-  background-color: #FFD432;
+  background-color: #C3DEE6;
   font-size: 1.2rem;
 }
