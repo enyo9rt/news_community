@@ -21,8 +21,9 @@ def home():
     token_receive = request.cookies.get('mytoken')  # 클라이언트로부터 mytoekn에 담겨 온 토큰 정보 받아주기
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"id": payload["id"]})
         status = True
-        return render_template('index.html', status=status)
+        return render_template('index.html', status=status, user_info=user_info)
     except :
         status = False
         return render_template('index.html', status=status)
@@ -58,18 +59,17 @@ def fake_sign_in():
         return jsonify({'result': 'fail', 'msg': '똥'})
 
 
-@application.route('/user/<username>')
-def user(username):
+@application.route('/profile/<userid>')
+def profile(userid):
     # 각 사용자의 프로필과 글을 모아볼 수 있는 공간
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        status = (username == payload["id"])  # 내 프로필이면 True, 다른 사람 프로필 페이지면 False
-
-        user_info = db.users.find_one({"username": username}, {"_id": False})
-        return render_template('user.html', user_info=user_info, status=status)
+        status = (userid == payload["id"])  # 내 프로필이면 True, 다른 사람 프로필 페이지면 False
+        user_info = db.users.find_one({"id": userid}, {"_id": False})
+        return render_template('profile.html', user_info=user_info, status=status)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
-        return redirect(url_for("home"))
+        return redirect(url_for("/"))
 
 
 if __name__ == '__main__':
