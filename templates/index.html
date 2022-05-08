@@ -32,7 +32,7 @@
                     if (response['result'] == 'success') {
                         console.log(response['token'])
                         $.cookie('mytoken', response['token'], {path: '/'});
-                        alert("test 로그인에 성공, 로그 아웃은 쿠키를 직접 지우세요")
+                        alert("test 로그인에 성공")
                         window.location.replace("/")
                     } else {
                         alert(response['msg'])
@@ -52,6 +52,7 @@
             <button class = 'test_login' onclick="fake_login()">가짜 로그인</button>
           {% else %}
               <button class = 'test_login'><a href="/profile/{{ user_info.id }}">신상 정보</a></button>
+              <button class = 'test_login' onclick="sign_out()">로그 아웃</button>
           {% endif %}
       </div>
     </div>
@@ -85,6 +86,7 @@
     <script src="./static/js/ui.js"></script>
     <script src="./static/js/weather_api.js"></script>
     <script src="./static/js/listing.js"></script>
+    <script src="../static/js/profile_about.js"></script>
 </body>
 
 </html>
