@@ -51,8 +51,10 @@
           {% if status == False %}
             <button class = 'test_login' onclick="fake_login()">가짜 로그인</button>
           {% else %}
-              <button class = 'test_login'><a href="/profile/{{ user_info.id }}">신상 정보</a></button>
-              <button class = 'test_login' onclick="sign_out()">로그 아웃</button>
+              <div class = 'test_login'>
+                  <button><a href="/profile/{{ user_info.id }}">신상 정보</a></button>
+                  <button onclick="sign_out()">로그아웃</button>
+              </div>
           {% endif %}
       </div>
     </div>
