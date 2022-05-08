@@ -37,6 +37,7 @@ def news_get():
     :return: 문자열 리스트, 뉴스 정보
     """
     news_list = news_getter.get_news()
+    print(news_list)
     return jsonify({'news_list': news_list})
 
 
