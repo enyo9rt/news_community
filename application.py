@@ -3,14 +3,14 @@ from pymongo import MongoClient
 from dev_module import news_getter
 from dev_module import weather
 from DB_ADMIN import account
-from dev_module.comments import comments
+from dev_module import detail
 from datetime import datetime, timedelta
 import jwt
 
 application = Flask(__name__)
 # weather.py 파일로 날씨 관련 api 분리 후 가져오기
 application.register_blueprint(weather.weather_api)
-application.register_blueprint(comments)
+application.register_blueprint(detail.detail)
 
 client = MongoClient(account.API_KEY)
 db = client.Haromony

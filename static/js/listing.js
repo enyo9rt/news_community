@@ -13,6 +13,7 @@ const listing = () => {
 
 
             for (let i = 0; i < news_list.length; i++) {
+                let post_id = news_list[i]['post_id'];
                 let title = news_list[i]['title'];
                 let contents = news_list[i]['explain']
                 let image_url = news_list[i]['image_url'];
@@ -21,7 +22,7 @@ const listing = () => {
                                             <img src=${image_url}
                                                  class="card-img-top">
                                             <div class="card-body">
-                                                <a href="comments"><h5 class="card-title">${title}</h5></a>
+                                                <a href="/detail/${post_id}"><h5 class="card-title">${title}</h5></a>
                                                 <p class="card-text">${contents}</p>
                                                 <p class="mycomment">조회수 0</p>
                                             </div>
