@@ -7,24 +7,65 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
     <link rel="stylesheet" href="static/style.css" />
-    <title>스파르타 피디아</title>
+    <title>할머니의 따뜻한 사랑</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+        <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <script>
+        const fake_login = () =>{
+            console.log('test')
+            $.ajax({
+                type: "POST",
+                url: "/fake_signin",
+                data: {
+                    username_give: 'test_id',
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        console.log(response['token'])
+                        $.cookie('mytoken', response['token'], {path: '/'});
+                        alert("test 로그인에 성공")
+                        window.location.replace("/")
+                    } else {
+                        alert(response['msg'])
+                    }
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
+  <header>
+    <div class="inner">
+      <div class="head-container">
+        <div class="head-brand"><a href="/">Team. harmony</a></div>
+          {% if status == False %}
+            <button class = 'test_login' onclick="fake_login()">가짜 로그인</button>
+          {% else %}
+              <div class = 'test_login'>
+                  <button><a href="/profile/{{ user_info.id }}">신상 정보</a></button>
+                  <button onclick="sign_out()">로그아웃</button>
+              </div>
+          {% endif %}
+      </div>
+    </div>
+  </header>
     <div class="mytitle">
         <div id="weather_container"></div>
         <div class="title_content">
             <h1>할머니는 다 들어주셔</h1>
             <h5 class = 'grand-mothers-love'>애들이 뉴스보다 싸울수도 있지, <br>왜 댓글을 못달게혀 .. <br><br> 하고 싶은 말 다 쓰고가 우리 똥강아지</h5>
-            <button onclick="open_box()">아가 기죽지마!!</button>
+            <button><a href="https://www.youtube.com/shorts/_EPr683g_oI" target="_blank"> 아가 기죽지마!!</a></button>
+            <button><a href="https://github.com/2022-Harmony" target="_blank"> Team about</a></button>
         </div>
     </div>
 
@@ -47,7 +88,7 @@
     <script src="./static/js/ui.js"></script>
     <script src="./static/js/weather_api.js"></script>
     <script src="./static/js/listing.js"></script>
-    <script src="./static/js/subscription.js"></script>
+    <script src="../static/js/profile_about.js"></script>
 </body>
 
 </html>

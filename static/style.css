@@ -96,3 +96,102 @@ h1 {
 .grand-mothers-love{
     color: darkgray;
 }
+
+
+header{
+  width: 100%;
+  height: 60px;
+  background-color: #f8f9fa;
+  box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, .2);
+  position: fixed; /* 스크롤 처리가 안되도록 position: fixed설정해줌 */
+  top: 0;
+  left: 0px;
+    z-index: 100;
+}
+
+.head-container{
+  width: 100%;
+  height: 100%;
+  display: flex; /* 안에거를 수평 정렬해야 해서 */
+  justify-content: space-between;
+  align-items: center;
+    margin-left: 20px;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+
+  margin: 0 auto;
+  padding: 0rem;
+  overflow: hidden;
+}
+
+.head-container .head-brand a:hover {
+  color: #2186c4;
+  cursor: pointer; /* cursor 포인터로 한다는 뜻, */
+}
+
+.head-container .head-brand {
+  font-weight: bold;
+  padding: 0.5rem;
+  background-color: #FFD432;
+  font-size: 1.2rem;
+}
+
+.head-container .head-blog {
+  font-weight: bold;
+  padding: 0.5rem;
+  background-color: #FFD432;
+  font-size: 1.2rem;
+}
+
+
+a {
+  all: unset;
+}
+
+
+li a:hover {
+  cursor: pointer;
+}
+
+
+a:link {
+  text-decoration: none;
+  color: #3f464d;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #3f464d;
+}
+
+a:active {
+  text-decoration: none;
+  color: #3f464d;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+
+
+.head-container .head-brand a:hover {
+  color: #2186c4;
+  cursor: pointer; /* cursor 포인터로 한다는 뜻, */
+}
+
+.head-container .head-brand {
+  font-weight: bold;
+  padding: 0.5rem;
+  background-color: #C3DEE6;
+  font-size: 1.2rem;
+}
+
+
+.test_login{
+    margin-right: 100px;
+}
