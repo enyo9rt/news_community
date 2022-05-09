@@ -1,5 +1,8 @@
-// 이번에 새로 만드는 댓글 post 하게 해주는 함수
+$(document).ready(function () {
 
+})
+
+// 댓글 작성 함수 -hj
 function post_comment() {
             const comment_value = $('#comment').val()
             const date = new Date().toISOString()
