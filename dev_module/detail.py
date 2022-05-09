@@ -15,7 +15,7 @@ detail = Blueprint('detail', __name__)
 
 @detail.route("/detail/<post_id>")
 def detail_load(post_id):
-    post = list(news.news_data.find_one({'post_id': post_id}, {'_id': 0}))
+    post = news.news_data.find_one({'post_id': int(post_id)}, {'_id': False})
     return render_template('detail.html', post=post)
 
 
