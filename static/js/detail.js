@@ -11,7 +11,8 @@ function post_comment() {
                 url: "/comment",
                 data: {
                     comment_give: comment_value,
-                    date_give: date
+                    date_give: date,
+                    id_give: post_id
                 },
                 success: function (response) {
                     alert(response['msg'])
