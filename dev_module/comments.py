@@ -1,36 +1,41 @@
 from flask import Flask, render_template, jsonify, request, Blueprint
+import jwt
+from pymongo import MongoClient
+from DB_ADMIN import account
 
 app = Flask(__name__)
 
-from pymongo import MongoClient
-from DB_ADMIN import account
 
 client = MongoClient(account.API_KEY)
 db = client.Haromony
 comments = Blueprint('comments', __name__)
 
+SECRET_KEY = 'test'
+
 
 @comments.route("/comments")
 def comments_load():
-    return render_template('comments.html')
+    return render_template('new_comment.html')
 
-@comments.route('/api/comment', methods=['POST'])
+
+@comments.route('/comment', methods=['POST'])
 def save_comment():
-    """
-    댓글 작성 정보(닉네임, 내용, 작성 시간)를 comments 컬렉션에 저장
-    :return:확인 메시지
-    """
-    comment_name_receive = request.form['comment_name_give']
-    comment_content_receive = request.form['comment_give']
-    time_receive = request.form['time_give']
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_info = db.users.find_one({"id": payload["id"]})
+
+    comment_receive = request.form['comment_give']
+    date_receive = request.form["date_give"]
 
     doc = {
-        'comment_name': comment_name_receive,
-        'comment_content': comment_content_receive,
-        'time': time_receive
+        "comment": comment_receive,
+        "user_id": user_info['id'],
+        "date": date_receive
     }
-    db.comments.insert_one(doc)
-    return jsonify({'msg': '작성 완료!'})
+
+    db.comment.insert_one(doc)
+    return jsonify({'msg': '의견이 정상적으로 등록되었습니다.'})
+
 
 @comments.route('/api/comment', methods=['GET'])
 def view_comments():
@@ -40,6 +45,7 @@ def view_comments():
     """
     comments = list(db.comments.find({}, {'_id': False}).sort('time', -1))
     return jsonify({'comments': comments})
+
 
 @comments.route('/api/like', methods=['POST'])
 def plus_like():
@@ -63,6 +69,7 @@ def plus_like():
         db.like.insert_one(doc)
 
     return jsonify({'msg': '좋아요 완료!'})
+
 
 @comments.route('/api/like', methods=['GET'])
 def show_likes():
