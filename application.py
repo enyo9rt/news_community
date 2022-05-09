@@ -21,7 +21,7 @@ def home():
     token_receive = request.cookies.get('mytoken')  # 클라이언트로부터 mytoekn에 담겨 온 토큰 정보 받아주기
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.users.find_one({"id": payload["id"]})
+        user_info = db.users.find_one({"user_id": payload["user_id"]})
         status = True
         return render_template('index.html', status=status, user_info=user_info)
     except :
@@ -45,11 +45,11 @@ def news_get():
 def fake_sign_in():
     # 로그인
     # username_receive = 'test_id'
-    result = db.users.find_one({'id': 'test_id'})
+    result = db.users.find_one({'user_id': 'test_id'})
     print(result)
     if result is not None:
         payload = {
-         'id': 'test_id',
+         'user_id': 'test_id',
          'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').encode().decode('utf-8')
