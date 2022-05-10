@@ -59,3 +59,14 @@ body {
 .logout_icon:hover {
     color: #3f464d;
 }
+
+.login_icon {
+    margin-top: 18px;
+    margin-right: 25px;
+    color: rgba(114, 168, 110, 0.8);
+    transform: scale(1.4);
+}
+
+.login_icon:hover {
+    color: #3f464d;
+}

@@ -1,14 +1,12 @@
 
 .fixed {
+    width: 700px;
     max-width: 800px;
-    max-height: 800px;
 }
 
 .news_wrap {
-
     display: flex;
     flex-direction: column;
-    width: 50%;
     margin: 30px auto;
     font-family: 'Nanum Gothic', sans-serif;
 }
@@ -22,11 +20,16 @@
     display: flex;
     max-width: 600px;
     max-height: 600px;
-    margin: auto;
+    margin: auto auto 10px auto;
+}
+
+.news_summary {
+    margin: 20px;
+    width: 620px;
+    min-height: 100px;
 }
 
 .comment_wrap {
-    width: 50%;
     margin: auto;
     margin-top: 20px;
 }
@@ -40,7 +43,6 @@
 .comment_hr {
     height: 2px;
     background: rgba(112, 120, 129, 0.5);
-    width: 50%;
     margin: auto;
     margin-top: 10px;
 }
@@ -48,20 +50,16 @@
 .comment_hr_second {
     height: 2px;
     background: rgba(112, 120, 129, 0.5);
-    width: 50%;
     margin: auto;
     margin-top: 20px;
 }
 
-.comment_head {
-    margin: 0 auto 5px auto;
-    width: 50%;
-    font-size: 20px;
-    font-family: 'Do Hyeon', sans-serif;
+.comments_count {
+    margin: 10px 0 -23px 5px;
 }
 
-.comments_count {
-    margin: 10px 0 0 3px;
+.comments_count > div {
+    margin-bottom: 20px;
 }
 
 .news_icon {
@@ -79,6 +77,9 @@
     transform: scale(1.2);
 }
 
+.dropdown-trigger {
+    transform: scale(0.85);
+}
 
 .like_icon {
     color: #48c78e;

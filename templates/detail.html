@@ -7,8 +7,6 @@
     <!-- link 모음 -->
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <!-- Font Awesome CSS -->
-    <script src="https://kit.fontawesome.com/f6788aacd4.js" crossorigin="anonymous"></script>
     <!-- Googole Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,12 +16,18 @@
     <link rel="stylesheet" href="../static/base.css">
     <link rel="stylesheet" href="../static/detail.css">
 
-
     <!-- script 모음 -->
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/js/detail.js"></script>
-    <script src="../static/js/profile_about.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <!-- Font Awesome CSS -->
+    <script src="https://kit.fontawesome.com/f6788aacd4.js" crossorigin="anonymous"></script>
+
     <script src="../static/js/ui.js"></script>
+    <script src="../static/js/weather_api.js"></script>
+    <script src="../static/js/listing.js"></script>
+    <script src="../static/js/profile_about.js"></script>
+    <script src="../static/js/detail.js"></script>
     <script>
         let now_post_id = "{{ post['post_id'] }}"
         $(document).ready(function () {
@@ -42,11 +46,15 @@
                     style="">Team. harmony</strong>
         </a>
     </div>
-    <div class="navbar_icon">
-        <span class="profile_icon"><i class="fa-regular fa-user"></i></span>
-        <span class="logout_icon"><i class="fa-solid fa-right-from-bracket"
-                                     aria-hidden="true"></i></span>
-    </div>
+        <div class="navbar_icon">
+            {% if status == False %}
+                <a class="login_icon" onclick="window.location.href = '/login'"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+            {% else %}
+                <a class="profile_icon" href="/profile/{{ user_info.user_id }}"><i class="fa-regular fa-user"></i></a>
+                <a class="logout_icon" onclick="sign_out()"><i class="fa-solid fa-right-from-bracket"
+                                             aria-hidden="true"></i></a>
+            {% endif %}
+        </div>
 </nav>
 
 <div class="news_wrap box fixed">
@@ -91,8 +99,10 @@
         <div class="comments_count level-left">
             <p class="subtitle is-5">
                 <strong>0</strong>
-            </p>&nbsp;comments
+            </p>
+            <small>&nbsp;comments</small>
         </div>
+
         <div class="dropdown is-right is-hoverable level-right">
             <div class="dropdown-trigger">
                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">

@@ -4,39 +4,60 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>할머니의 따뜻한 사랑</title>
 
+    <!-- link 모음 -->
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <!-- BootStrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="static/style.css" />
-    <title>할머니의 따뜻한 사랑</title>
+    <!-- Googole Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-        <!-- JS -->
+
+    <link rel="stylesheet" href="static/base.css">
+    <link rel="stylesheet" href="static/style.css" />
+
+    <!-- script 모음 -->
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    
+    <!-- Font Awesome CSS -->
+    <script src="https://kit.fontawesome.com/f6788aacd4.js" crossorigin="anonymous"></script>
+    <!-- BootStrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+    <script src="./static/js/ui.js"></script>
+    <script src="./static/js/weather_api.js"></script>
+    <script src="./static/js/listing.js"></script>
+    <script src="../static/js/profile_about.js"></script>
+
 </head>
 
-<body>
-  <header>
-    <div class="inner">
-      <div class="head-container">
-        <div class="head-brand"><a href="/">Team. harmony</a></div>
-          {% if status == False %}
-            <button class = 'test_login' onclick="window.location.href = '/login'">로그인</button>
-          {% else %}
-              <div class = 'test_login'>
-                  <button><a href="/profile/{{ user_info.user_id }}">신상 정보</a></button>
-                  <button onclick="sign_out()">로그아웃</button>
-              </div>
-          {% endif %}
-      </div>
-    </div>
-  </header>
+<body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <img src="../static/logo.png"/>
+                <strong class="navbar_text"
+                        style="">Team. harmony</strong>
+            </a>
+        </div>
+        <div class="navbar_icon">
+            {% if status == False %}
+                <a class="login_icon" onclick="window.location.href = '/login'"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+            {% else %}
+                <a class="profile_icon" href="/profile/{{ user_info.user_id }}"><i class="fa-regular fa-user"></i></a>
+                <a class="logout_icon" onclick="sign_out()"><i class="fa-solid fa-right-from-bracket"
+                                             aria-hidden="true"></i></a>
+            {% endif %}
+        </div>
+    </nav>
+
     <div class="mytitle">
         <div id="weather_container"></div>
         <div class="title_content">
@@ -63,10 +84,6 @@
             </div>
         </div>
     </div>
-    <script src="./static/js/ui.js"></script>
-    <script src="./static/js/weather_api.js"></script>
-    <script src="./static/js/listing.js"></script>
-    <script src="../static/js/profile_about.js"></script>
 </body>
 
 </html>

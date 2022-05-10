@@ -1,7 +1,15 @@
+.navbar-brand {
+    margin-top: -12px;
+}
+
+.navbar_icon {
+    margin-top: -25px;
+}
+
 body {
-    background-color: rgba(114, 168, 110, 0.8);;
+    background-color: rgba(114, 168, 110, 0.8);
     min-height: 100vh;
-		padding-top: 3.25rem;
+    padding-top: 3.25rem;
 }
 
 .section {
