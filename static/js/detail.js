@@ -51,6 +51,7 @@ function num2str(count) {
     return count
 }
 
+// 댓글 리스팅
 function comments_get(user_id, post_id) {
     console.log(user_id, post_id)
     if (user_id == undefined) {
@@ -107,6 +108,7 @@ function comments_get(user_id, post_id) {
     })
 }
 
+// 북마크 여부 확인
 function bookmarked(post_id) {
     console.log(post_id)
     $("#bookmark").empty()
@@ -131,7 +133,6 @@ function bookmarked(post_id) {
         }
     })
 }
-
 
 // 좋아요, 좋아요 취소
 function toggle_like(comment_id) {
