@@ -16,10 +16,9 @@ detail = Blueprint('detail', __name__)
 @detail.route("/detail/<post_id>")
 def detail_load(post_id):
     post = news.find_one({'post_id': int(post_id)}, {'_id': False})
-<<<<<<< HEAD
     id_receive = post_id
     return render_template('detail.html', post=post, id=id_receive)
-=======
+
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -29,10 +28,8 @@ def detail_load(post_id):
     except :
         status = False
         return render_template('index.html', status=status)
->>>>>>> main
 
 
-# -hj
 @detail.route('/comment', methods=['POST'])
 def save_comment():
     # 토큰으로 유저 정보 가져오기
