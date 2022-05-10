@@ -5,7 +5,6 @@ from dev_module import weather
 from DB_ADMIN import account
 from dev_module import detail
 from datetime import datetime, timedelta
-from flask_socketio import SocketIO
 import jwt
 import hashlib
 
