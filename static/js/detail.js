@@ -49,14 +49,18 @@ function num2str(count) {
     return count
 }
 
-function comments_get(user_id) {
+function comments_get(user_id, post_id) {
+    console.log(user_id, post_id)
     if (user_id == undefined) {
         user_id = ""
+    }
+    else if (post_id == undefined) {
+        post_id = ""
     }
     $("#comment-box").empty()
     $.ajax({
         type: "GET",
-        url: `/comments_get?user_id_give=${user_id}`,
+        url: `/comments_get?user_id_give=${user_id}&post_id_give=${post_id}`,
         data: {},
         success: function (response) {
             if (response["result"] == "success") {
