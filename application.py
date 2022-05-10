@@ -18,6 +18,7 @@ client = MongoClient(account.API_KEY)
 db = client.Haromony
 SECRET_KEY = 'test'
 
+
 @application.route('/')
 def home():
     token_receive = request.cookies.get('mytoken')  # 클라이언트로부터 mytoekn에 담겨 온 토큰 정보 받아주기
@@ -55,6 +56,7 @@ def profile(userid):
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("/"))
 
+
 @application.route('/login')
 def login():
     msg = request.args.get("msg")
@@ -77,7 +79,6 @@ def sign_in():
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
-
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
     else:
@@ -92,7 +93,7 @@ def sign_up():
     doc = {
         "user_id": username_receive,  # 아이디
         "password": password_hash,  # 비밀번호
-        "nick_name": username_receive,  # 프로필 이름 기본값은 아이디
+        "nick_name": username_receive,  # 닉네임 기본값은 아이디
         "profile_pic": "",  # 프로필 사진 파일 이름
         "profile_pic_real": "profile_pics/profile_placeholder.png",  # 프로필 사진 기본 이미지
         "profile_info": ""  # 프로필 한 마디
@@ -106,6 +107,7 @@ def check_dup():
     username_receive = request.form['username_give']
     exists = bool(db.users.find_one({"user_id": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
+
 
 if __name__ == '__main__':
     application.run('0.0.0.0', port=5000, debug=True)
