@@ -1,0 +1,25 @@
+.login-wrap {
+    background: lightblue;
+}
+
+.login-title {
+    font-weight: 800;
+    font-size: 5rem;
+}
+
+.login-subtitle {
+    font-size: 2rem;
+}
+
+.form-area {
+    width: 500px;
+    margin: auto;
+    border: darkgray 3px dashed;
+    border-radius: 1%;
+    padding: 20px;
+}
+
+.undertexts {
+    text-align: left;
+    padding-left: 2px;
+}

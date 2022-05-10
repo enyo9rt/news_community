@@ -12,38 +12,12 @@
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
+    <link rel="stylesheet" href="../static/login.css" />
+
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <style>
-        .login-wrap {
-            background: lightblue;
-        }
-
-        .login-title {
-            font-weight: 800;
-            font-size: 5rem;
-        }
-
-        .login-subtitle {
-            font-size: 2rem;
-        }
-
-        .form-area {
-            width: 500px;
-            margin: auto;
-            border: darkgray 3px dashed;
-            border-radius: 1%;
-            padding: 20px;
-        }
-
-        .undertexts {
-            text-align: left;
-            padding-left: 2px;
-        }
-
-    </style>
     <script>
         // {% if msg %}
             //    alert("{{ msg }}")
@@ -183,7 +157,7 @@
                     if (response['result'] == 'success') {
                         $.cookie('mytoken', response['token'], {path: '/'});
                         window.location.replace("/")
-                        alert("test 로그인에 성공")
+                        alert("로그인에 성공")
                     } else {
                         alert(response['msg'])
                     }

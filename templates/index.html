@@ -19,28 +19,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     
-    <script>
-        const fake_login = () => {
-            console.log('test')
-            $.ajax({
-                type: "POST",
-                url: "/fake_signin",
-                data: {
-                    username_give: 'test_id',
-                },
-                success: function (response) {
-                    if (response['result'] == 'success') {
-                        console.log(response['token'])
-                        $.cookie('mytoken', response['token'], {path: '/'});
-                        alert("test 로그인에 성공")
-                        window.location.replace("/")
-                    } else {
-                        alert(response['msg'])
-                    }
-                }
-            });
-        }
-    </script>
 </head>
 
 <body>

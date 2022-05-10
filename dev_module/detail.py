@@ -36,7 +36,9 @@ def save_comment():
     doc = {
         "comment": comment_receive,
         "user_id": user_info['user_id'],
+        "nick_name": user_info['nick_name'],
         "date": date_receive,
+        "profile_pic_real": user_info['profile_pic_real'],
         "post_id": id_receive
     }
 

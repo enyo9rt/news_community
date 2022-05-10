@@ -17,6 +17,7 @@ client = MongoClient(account.API_KEY)
 db = client.Haromony
 SECRET_KEY = 'test'
 
+
 @application.route('/')
 def home():
     token_receive = request.cookies.get('mytoken')  # 클라이언트로부터 mytoekn에 담겨 온 토큰 정보 받아주기
@@ -42,26 +43,6 @@ def news_get():
     return jsonify({'news_list': news_list})
 
 
-
-@application.route('/fake_signin', methods=['POST'])
-def fake_sign_in():
-    # 로그인
-    # username_receive = 'test_id'
-    result = db.users.find_one({'user_id': 'test_id'})
-    print(result)
-    if result is not None:
-        payload = {
-         'user_id': 'test_id',
-         'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
-        }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').encode().decode('utf-8')
-        print(f'token_content: {token}')
-        return jsonify({'result': 'success', 'token': token})
-    # 찾지 못하면
-    else:
-        return jsonify({'result': 'fail', 'msg': '똥'})
-
-
 @application.route('/profile/<userid>')
 def profile(userid):
     # 각 사용자의 프로필과 글을 모아볼 수 있는 공간
@@ -73,6 +54,7 @@ def profile(userid):
         return render_template('profile.html', user_info=user_info, status=status)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("/"))
+
 
 @application.route('/login')
 def login():
@@ -91,11 +73,10 @@ def sign_in():
 
     if result is not None:
         payload = {
-            'id': username_receive,
+            'user_id': username_receive,  # user 회원가입 시 아이디 갖고 오는 key 값 'user_id'로 수정함
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-
 
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
@@ -111,7 +92,7 @@ def sign_up():
     doc = {
         "user_id": username_receive,  # 아이디
         "password": password_hash,  # 비밀번호
-        "nick_name": username_receive,  # 프로필 이름 기본값은 아이디
+        "nick_name": username_receive,  # 닉네임 기본값은 아이디
         "profile_pic": "",  # 프로필 사진 파일 이름
         "profile_pic_real": "profile_pics/profile_placeholder.png",  # 프로필 사진 기본 이미지
         "profile_info": ""  # 프로필 한 마디
@@ -125,6 +106,7 @@ def check_dup():
     username_receive = request.form['username_give']
     exists = bool(db.users.find_one({"user_id": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
+
 
 if __name__ == '__main__':
     application.run('0.0.0.0', port=5000, debug=True)
