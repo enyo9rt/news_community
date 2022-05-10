@@ -23,7 +23,7 @@ def home():
     token_receive = request.cookies.get('mytoken')  # 클라이언트로부터 mytoekn에 담겨 온 토큰 정보 받아주기
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.users.find_one({"user_id": payload["user_id"]})
+        user_info = db.users.find_one({"user_id": payload["id"]})
         status = True
         return render_template('index.html', status=status, user_info=user_info)
     except :
@@ -73,7 +73,7 @@ def sign_in():
 
     if result is not None:
         payload = {
-            'user_id': username_receive,  # user 회원가입 시 아이디 갖고 오는 key 값 'user_id'로 수정함
+            'id': username_receive,
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')

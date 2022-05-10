@@ -35,7 +35,7 @@ def save_comment():
     # 토큰으로 유저 정보 가져오기
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    user_info = db.users.find_one({"user_id": payload["user_id"]})
+    user_info = db.users.find_one({"user_id": payload["id"]})
 
     # 클라이언트로부터 데이터 받아오기
     comment_receive = request.form['comment_give']
