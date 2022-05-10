@@ -35,7 +35,11 @@
     <script src="./static/js/weather_api.js"></script>
     <script src="./static/js/listing.js"></script>
     <script src="../static/js/profile_about.js"></script>
-
+    <script>
+        {% if msg %}
+            alert("{{ msg }}")
+        {% endif %}
+    </script>
 </head>
 
 <body class="has-navbar-fixed-top">

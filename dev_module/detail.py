@@ -24,7 +24,7 @@ def detail_load(post_id):
         return render_template('detail.html', post=post, status=status, user_info=user_info)
     except:
         status = False
-        return render_template('index.html', status=status)
+        return redirect(url_for("home", msg="로그인을 해주세요!"))
 
 
 @detail.route('/comment', methods=['POST'])
