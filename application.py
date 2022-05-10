@@ -5,6 +5,7 @@ from dev_module import weather
 from DB_ADMIN import account
 from dev_module import detail
 from datetime import datetime, timedelta
+from flask_socketio import SocketIO
 import jwt
 import hashlib
 
@@ -40,27 +41,6 @@ def news_get():
     news_list = news_getter.get_news()
     print(news_list)
     return jsonify({'news_list': news_list})
-
-
-
-@application.route('/fake_signin', methods=['POST'])
-def fake_sign_in():
-    # 로그인
-    # username_receive = 'test_id'
-    result = db.users.find_one({'id': 'test_id'})
-    print(result)
-    if result is not None:
-        payload = {
-         'id': 'test_id',
-         'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
-        }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').encode().decode('utf-8')
-        print(f'token_content: {token}')
-        return jsonify({'result': 'success', 'token': token})
-    # 찾지 못하면
-    else:
-        return jsonify({'result': 'fail', 'msg': '똥'})
-
 
 @application.route('/profile/<userid>')
 def profile(userid):
