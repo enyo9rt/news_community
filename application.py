@@ -5,7 +5,7 @@ from dev_module import weather
 from DB_ADMIN import account
 from dev_module import detail
 from datetime import datetime, timedelta
-from flask_socketio import SocketIO
+from werkzeug.utils import secure_filename
 import jwt
 import hashlib
 
@@ -55,6 +55,34 @@ def profile(userid):
         return render_template('profile.html', user_info=user_info, status=status)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("/"))
+
+@application.route('/update_profile', methods=['POST'])
+def save_img():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        username = payload["id"]
+        name_receive = request.form["name_give"]
+        about_receive = request.form["about_give"]
+        new_doc = {
+            "profile_name": name_receive,
+            "profile_info": about_receive
+        }
+        if 'file_give' in request.files:
+            file = request.files["file_give"]
+            filename = secure_filename(file.filename)
+            extension = filename.split(".")[-1]
+            file_path = f"profile_pics/{username}.{extension}"
+            file.save("./static/"+file_path)
+            new_doc["profile_pic"] = filename
+            new_doc["profile_pic_real"] = file_path
+        print(payload['id'])
+        db.users.update_one({'user_id': payload['id']}, {'$set': new_doc})
+        return jsonify({"result": "success", 'msg': '프로필을 업데이트했습니다.'})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        print('image save fail')
+        return redirect(url_for("home"))
+
 
 
 @application.route('/login')
@@ -107,6 +135,7 @@ def check_dup():
     username_receive = request.form['username_give']
     exists = bool(db.users.find_one({"user_id": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
+
 
 
 if __name__ == '__main__':
