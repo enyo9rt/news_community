@@ -21,13 +21,12 @@
 
     <!-- script 모음 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='detail.js') }}"></script>
+    <script src="../static/js/detail.js"></script>
     <script>
         let now_post_id = "{{ post['post_id'] }}"
         $(document).ready(function () {
-            comments_get()
+            comments_get("", now_post_id)
             bookmarked(now_post_id)
-            console.log(now_post_id)
         })
     </script>
 </head>

@@ -64,10 +64,10 @@ def like_update():
             "user_id": user_info
         }
         if action_receive == "like":
-            db.users.insert_one(doc)
+            db.action.insert_one(doc)
         else:
-            db.users.delete_one(doc)
-        count = db.users.count_documents({"like_comment_id": comment_id_receive})
+            db.action.delete_one(doc)
+        count = db.action.count_documents({"like_comment_id": comment_id_receive})
         print(count)
         return jsonify({"result": "success", "count": count})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
@@ -91,9 +91,9 @@ def bookmark():
             "user_id": user_info
         }
         if action_receive == "bookmark":
-            db.users.insert_one(doc)
+            db.action.insert_one(doc)
         else:
-            db.users.delete_one(doc)
+            db.action.delete_one(doc)
         return jsonify({"result": "success"})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
@@ -111,15 +111,17 @@ def comments_get():
         user_info = payload["id"]
         # 매개변수로 받은 user_id 유무에 따라 find 조건 걸어주기
         user_id_receive = request.args.get("user_id_give")
+        post_id_receive = request.args.get("post_id_give")
+        # user_id가 없으면 post_id와 매칭되는 댓글 가져오기
         if user_id_receive=="":
-            comments = list(db.comments.find({}).sort("date", -1).limit(20))
+            comments = list(db.comments.find({"post_id": post_id_receive}).sort("date", -1).limit(20))
         else:
             comments = list(db.comments.find({"user_id": user_id_receive}).sort("date", -1).limit(20))
-        # 좋아요 갯수
         for comment in comments:
             comment["_id"] = str(comment["_id"])
-            comment["count_like"] = db.users.count_documents({"like_comment_id": comment["_id"]})
-            comment["like_by_me"] = bool(db.users.find_one({"like_comment_id": comment["_id"], "user_id": user_info}))
+            # 좋아요 갯수, 여부 확인
+            comment["count_like"] = db.action.count_documents({"like_comment_id": comment["_id"]})
+            comment["like_by_me"] = bool(db.action.find_one({"like_comment_id": comment["_id"], "user_id": user_info}))
         return jsonify({"result": "success", "msg": "comments_get", "comments": comments})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
@@ -128,7 +130,7 @@ def comments_get():
 @detail.route('/bookmarked', methods=['GET'])
 def bookmarked():
     """ -yj
-    북마크 됐는지 확인
+    북마크 여부 확인
     :return:
     """
     token_receive = request.cookies.get('mytoken')
@@ -137,7 +139,7 @@ def bookmarked():
         user_info = payload["id"]
         # 매개변수로 받은 user_id 유무에 따라 find 조건 걸어주기
         post_id_receive = request.args.get("post_id_give")
-        bookmark_by_me = bool(db.users.find_one({"bookmark_post_id": post_id_receive, "user_id": user_info}))
+        bookmark_by_me = bool(db.action.find_one({"bookmark_post_id": post_id_receive, "user_id": user_info}))
         return jsonify({"result": "success", "bookmark_by_me": bookmark_by_me})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
