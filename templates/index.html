@@ -30,7 +30,7 @@
             <button class = 'test_login' onclick="window.location.href = '/login'">로그인</button>
           {% else %}
               <div class = 'test_login'>
-                  <button><a href="/profile/{{ user_info.id }}">신상 정보</a></button>
+                  <button><a href="/profile/{{ user_info.user_id }}">신상 정보</a></button>
                   <button onclick="sign_out()">로그아웃</button>
               </div>
           {% endif %}

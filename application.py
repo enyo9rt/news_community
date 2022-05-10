@@ -5,6 +5,7 @@ from dev_module import weather
 from DB_ADMIN import account
 from dev_module import detail
 from datetime import datetime, timedelta
+from flask_socketio import SocketIO
 import jwt
 import hashlib
 
@@ -22,7 +23,7 @@ def home():
     token_receive = request.cookies.get('mytoken')  # 클라이언트로부터 mytoekn에 담겨 온 토큰 정보 받아주기
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.users.find_one({"id": payload["id"]})
+        user_info = db.users.find_one({"user_id": payload["id"]})
         status = True
         return render_template('index.html', status=status, user_info=user_info)
     except :
@@ -41,6 +42,7 @@ def news_get():
     print(news_list)
     return jsonify({'news_list': news_list})
 
+
 @application.route('/profile/<userid>')
 def profile(userid):
     # 각 사용자의 프로필과 글을 모아볼 수 있는 공간
@@ -48,7 +50,7 @@ def profile(userid):
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         status = (userid == payload["id"])  # 내 프로필이면 True, 다른 사람 프로필 페이지면 False
-        user_info = db.users.find_one({"id": userid}, {"_id": False})
+        user_info = db.users.find_one({"user_id": userid}, {"_id": False})
         return render_template('profile.html', user_info=user_info, status=status)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("/"))
