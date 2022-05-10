@@ -1,7 +1,3 @@
-$(document).ready(function () {
-
-})
-
 // 댓글 작성 함수 -hj
 function post_comment() {
     const comment_value = $('#comment').val()
@@ -12,11 +8,12 @@ function post_comment() {
         data: {
             comment_give: comment_value,
             date_give: date,
-            id_give: post_id
+            id_give: now_post_id
         },
         success: function (response) {
             alert(response['msg'])
             $('#comment').val('')
+            comments_get("",now_post_id)
         }
     })
 }
@@ -68,14 +65,18 @@ function num2str(count) {
     return count
 }
 
-function comments_get(user_id) {
+function comments_get(user_id, post_id) {
+    console.log(user_id, post_id)
     if (user_id == undefined) {
         user_id = ""
+    }
+    else if (post_id == undefined) {
+        post_id = ""
     }
     $("#comment-box").empty()
     $.ajax({
         type: "GET",
-        url: `/comments_get?user_id_give=${user_id}`,
+        url: `/comments_get?user_id_give=${user_id}&post_id_give=${post_id}`,
         data: {},
         success: function (response) {
             if (response["result"] == "success") {
@@ -132,9 +133,9 @@ function bookmarked(post_id) {
                 let bookmark_by_me = response["bookmark_by_me"]
                 console.log(bookmark_by_me)
                 let icon = bookmark_by_me ? "fa-bookmark" : "fa-bookmark-o"
-                let temp_html = `<div id="{{ post.post_id }}" class="bookmark">
+                let temp_html = `<div id="${post_id}" class="bookmark">
                                     <a class="level-item is-sparta" aria-label="bookmark"
-                                           onclick="toggle_bookmark({{ post.post_id }})">
+                                           onclick="toggle_bookmark(${post_id})">
                                                     <span class="icon is-small"><i class="fa fa-solid ${icon}"
                                                                                    aria-hidden="true"></i></span>
                                     </a>
