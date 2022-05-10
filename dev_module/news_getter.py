@@ -11,7 +11,8 @@ def get_news():
     :return: 문자열 리스트
     '''
     try:
-        news_box = list(db.news_data.find({}, {'_id': False}))
+        news_box = list(db.news_data.find({}, {'_id': False}).limit(20).sort([("post_id", -1)]))
+        # print(news_box)
         return news_box
 
     except:

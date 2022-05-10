@@ -1,5 +1,5 @@
 body {
-    background-color: RGBA(232, 52, 78, 0.2);
+    background-color: rgba(114, 168, 110, 0.8);;
     min-height: 100vh;
 		padding-top: 3.25rem;
 }
@@ -15,15 +15,15 @@ body {
 }
 
 .button.is-sparta {
-    background-color: #e8344e;
+    background-color: rgba(114, 168, 110, 0.8);
     border-color: transparent;
     color: #fff !important;
 }
 
 .button.is-sparta.is-outlined {
     background-color: transparent;
-    border-color: #e8344e;
-    color: #e8344e !important;
+    border-color: rgba(114, 168, 110, 0.8);
+    color: rgba(114, 168, 110, 0.8) !important;
 }
 
 .modal-content {

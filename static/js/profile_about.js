@@ -25,7 +25,6 @@ function update_profile() {
             if (response["result"] == "success") {
                 alert(response["msg"])
                 window.location.reload()
-
             }
         }
     });
