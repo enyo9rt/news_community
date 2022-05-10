@@ -16,9 +16,6 @@ detail = Blueprint('detail', __name__)
 @detail.route("/detail/<post_id>")
 def detail_load(post_id):
     post = news.find_one({'post_id': int(post_id)}, {'_id': False})
-    id_receive = post_id
-    return render_template('detail.html', post=post, id=id_receive)
-
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
