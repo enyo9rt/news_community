@@ -113,9 +113,9 @@ function bookmarked(post_id) {
                 let bookmark_by_me = response["bookmark_by_me"]
                 console.log(bookmark_by_me)
                 let icon = bookmark_by_me ? "fa-bookmark" : "fa-bookmark-o"
-                let temp_html = `<div id="{{ post.post_id }}" class="bookmark">
+                let temp_html = `<div id="${post_id}" class="bookmark">
                                     <a class="level-item is-sparta" aria-label="bookmark"
-                                           onclick="toggle_bookmark({{ post.post_id }})">
+                                           onclick="toggle_bookmark(${post_id})">
                                                     <span class="icon is-small"><i class="fa fa-solid ${icon}"
                                                                                    aria-hidden="true"></i></span>
                                     </a>

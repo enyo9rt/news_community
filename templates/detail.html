@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,8 @@
     <!-- Googole Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700&display=swap"
+          rel="stylesheet">
 
     <link rel="stylesheet" href="../static/base.css">
     <link href='{{ url_for("static", filename="detail.css") }}' rel="stylesheet">
@@ -20,14 +21,13 @@
 
     <!-- script 모음 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/js/detail.js"></script>
-    <script src="../static/js/profile_about.js"></script>
-    <script src="../static/js/ui.js"></script>
+    <script src="{{ url_for('static', filename='detail.js') }}"></script>
     <script>
         let now_post_id = "{{ post['post_id'] }}"
         $(document).ready(function () {
             comments_get()
             bookmarked(now_post_id)
+            console.log(now_post_id)
         })
     </script>
 </head>
@@ -47,7 +47,6 @@
                                      aria-hidden="true"></i></span>
     </div>
 </nav>
-</div>
 
 <div class="news_wrap box">
     <div class="news_title">{{ post.title }}</div>
@@ -108,8 +107,8 @@
                 </div>
             </article>
         </div>
-
     </div>
 </section>
 </body>
+
 </html>
