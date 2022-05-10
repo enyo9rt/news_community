@@ -22,7 +22,7 @@ def detail_load(post_id):
         user_info = db.users.find_one({"user_id": payload["id"]})
         status = True
         return render_template('detail.html', post=post, status=status, user_info=user_info)
-    except :
+    except:
         status = False
         return render_template('index.html', status=status)
 
@@ -30,17 +30,23 @@ def detail_load(post_id):
 # -hj
 @detail.route('/comment', methods=['POST'])
 def save_comment():
+    # 토큰으로 유저 정보 가져오기
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    user_info = db.users.find_one({"id": payload["id"]})
+    user_info = db.users.find_one({"user_id": payload["id"]})
 
+    # 클라이언트로부터 데이터 받아오기
     comment_receive = request.form['comment_give']
     date_receive = request.form["date_give"]
+    id_receive = request.form["id_give"]
 
     doc = {
         "comment": comment_receive,
-        "user_id": user_info['id'],
-        "date": date_receive
+        "user_id": user_info['user_id'],
+        "nick_name": user_info['nick_name'],
+        "date": date_receive,
+        "profile_pic_real": user_info['profile_pic_real'],
+        "post_id": id_receive
     }
 
     db.comments.insert_one(doc)
