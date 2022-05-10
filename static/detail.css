@@ -1,3 +1,29 @@
+.news_wrap {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    max-width: 800px;
+    max-height: 800px;
+    margin: 30px auto;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.news_wrap > news_title {
+    font-size: 5rem;
+    font-weight: bold;
+}
+
+.news_photo > img {
+    display: flex;
+    max-width: 600px;
+    max-height: 600px;
+    margin: auto;
+}
+
+.bookmark {
+    transform: scale(1.5);
+}
+
 .comment_wrap {
     width: 50%;
     margin: auto;
@@ -12,7 +38,7 @@
 
 .comment_hr {
     height: 2px;
-    background: black;
+    background: rgba(63, 70, 77, 0.7);
     width: 50%;
     margin: auto;
     margin-top: 10px;
@@ -20,7 +46,7 @@
 
 .comment_hr_second {
     height: 2px;
-    background: black;
+    background: rgba(63, 70, 77, 0.7);
     width: 50%;
     margin: auto;
     margin-top: 20px;
@@ -29,7 +55,12 @@
 .comment_head {
     width: 50%;
     font-size: 20px;
-    margin: auto;
+    margin-left: 90px;
     margin-top: 10px;
     text-align: center;
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+.like_icon {
+    color: #48c78e;
 }
