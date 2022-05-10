@@ -55,6 +55,22 @@ def save_comment():
     return jsonify({'msg': '의견이 정상적으로 등록되었습니다.'})
 
 
+@detail.route('/comment/delete', methods=['POST'])
+def delete_comment():
+    post_id_receive = request.form['id_give']
+    # 토큰으로 유저 정보 가져오기
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_info = db.users.find_one({"user_id": payload["id"]})
+
+    comment = db.comments.find_one({'user_id': user_info['user_id'], 'post_id': post_id_receive})
+    comment_id = comment.inserted_id
+
+    db.comments.delete_one({"_id": comment_id})
+
+    return jsonify({'msg': '의견이 삭제 되었습니다.'})
+
+
 @detail.route('/like_update', methods=['POST'])
 def like_update():
     """ -yj

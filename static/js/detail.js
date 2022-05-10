@@ -21,6 +21,20 @@ function post_comment() {
     })
 }
 
+function delete_comment() {
+    $.ajax({
+        type: "POST",
+        url: "/comment/delete",
+        data: {
+            id_give: post_id
+        },
+        success: function (response) {
+            alert(response['msg'])
+            window.location.reload()
+        }
+    })
+}
+
 // 댓글 작성 시간 단위
 function time2str(date) {
     let today = new Date()
