@@ -1,20 +1,25 @@
+$(document).ready(function () {
+
+})
+
 // 댓글 작성 함수 -hj
 function post_comment() {
-            const comment_value = $('#comment').val()
-            const date = new Date().toISOString()
-            $.ajax({
-                type: "POST",
-                url: "/comment",
-                data: {
-                    comment_give: comment_value,
-                    date_give: date
-                },
-                success: function (response) {
-                    alert(response['msg'])
-                    $('#comment').val('')
-                }
-            })
+    const comment_value = $('#comment').val()
+    const date = new Date().toISOString()
+    $.ajax({
+        type: "POST",
+        url: "/comment",
+        data: {
+            comment_give: comment_value,
+            date_give: date,
+            id_give: post_id
+        },
+        success: function (response) {
+            alert(response['msg'])
+            $('#comment').val('')
         }
+    })
+}
 
 // 댓글 작성 시간 단위
 function time2str(date) {
@@ -65,7 +70,7 @@ function comments_get(user_id) {
                     let comment = comments[i]
                     let time = time2str(new Date(comment["date"]))
                     let count = num2str(comment["count_like"])
-                    let icon = comment['like_by_me'] ? "fa-heart": "fa-heart-o"
+                    let icon = comment['like_by_me'] ? "fa-heart" : "fa-heart-o"
                     let temp_html = `<div class="box" id="${comment["_id"]}">
                                         <article class="media">
                                             <div class="media-left">
@@ -105,10 +110,10 @@ function bookmarked(post_id) {
     console.log(post_id)
     $("#bookmark").empty()
     $.ajax({
-    type: "GET",
-    url: `/bookmarked?post_id_give=${post_id}`,
-    data: {},
-    success: function (response) {
+        type: "GET",
+        url: `/bookmarked?post_id_give=${post_id}`,
+        data: {},
+        success: function (response) {
             if (response["result"] == "success") {
                 let bookmark_by_me = response["bookmark_by_me"]
                 console.log(bookmark_by_me)
@@ -121,7 +126,10 @@ function bookmarked(post_id) {
                                     </a>
                                   </div>`
                 $("#bookmark").append(temp_html)
-            }}})}
+            }
+        }
+    })
+}
 
 
 // 좋아요, 좋아요 취소
