@@ -18,7 +18,7 @@
         <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-
+    
     <script>
         const fake_login = () => {
             console.log('test')
@@ -49,7 +49,7 @@
       <div class="head-container">
         <div class="head-brand"><a href="/">Team. harmony</a></div>
           {% if status == False %}
-            <button class = 'test_login' onclick="fake_login()">가짜 로그인</button>
+            <button class = 'test_login' onclick="window.location.href = '/login'">로그인</button>
           {% else %}
               <div class = 'test_login'>
                   <button><a href="/profile/{{ user_info.id }}">신상 정보</a></button>
