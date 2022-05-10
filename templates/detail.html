@@ -5,28 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>할머니의 따뜻한 사랑</title>
     <!-- link 모음 -->
+    <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="../static/detail.css">
+    <!-- Font Awesome CSS -->
+    <script src="https://kit.fontawesome.com/f6788aacd4.js" crossorigin="anonymous"></script>
+    <!-- Googole Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/base.css">
+    <link href='{{ url_for("static", filename="detail.css") }}' rel="stylesheet">
+
 
     <!-- script 모음 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./static/js/detail.js"></script>
-
+    <script src="../static/js/detail.js"></script>
+    <script src="../static/js/profile_about.js"></script>
+    <script src="../static/js/ui.js"></script>
+    <script>
+        let now_post_id = "{{ post['post_id'] }}"
+        $(document).ready(function () {
+            comments_get()
+            bookmarked(now_post_id)
+        })
+    </script>
 </head>
-<body>
-기사 제목 잘 나오는지 확인! ★★★{{ post.title }}★★★
-<div class="comment_head">
-    <h1>의견을 남겨주세요 👍🏻</h1>
+
+<body class="has-navbar-fixed-top">
+<nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <img src="../static/logo.png"/>
+            <strong class="navbar_text"
+                    style="">Team. harmony</strong>
+        </a>
+    </div>
+    <div class="navbar_icon">
+        <span class="profile_icon"><i class="fa-regular fa-user"></i></span>
+        <span class="logout_icon"><i class="fa-solid fa-right-from-bracket"
+                                     aria-hidden="true"></i></span>
+    </div>
+</nav>
 </div>
+
+<div class="news_wrap box">
+    <div class="news_title">{{ post.title }}</div>
+    <span class="news_photo"><img src="{{ post.image_url }}" alt="Image"></span>
+    <div class="news_summary">{{ post.summary }}</div>
+</div>
+
+<div id="bookmark" class="bookmark">
+    <div id="{{ post.post_id }}">
+        <a class="level-item is-sparta" aria-label="bookmark"
+           onclick="toggle_bookmark({{ post.post_id }})">
+                                        <span class="icon is-small"><i class="fa fa-solid fa-bookmark-o"
+                                                                       aria-hidden="true"></i></span>
+        </a></div>
+</div>
+
 <hr class="comment_hr">
-    <div class="comment_wrap">
-        <div class="control">
-            <textarea id="comment" class="textarea is-hovered" placeholder="의견 남기기"></textarea>
-            <div class="button-wrap">
-                <button class="button is-success" onclick="post_comment()">의견 등록</button>
-            </div>
+<div class="comment_head"><h1>의견을 남겨주세요 👍🏻</h1></div>
+<div class="comment_wrap">
+    <div class="control">
+        <textarea id="comment" class="textarea is-hovered" placeholder="의견 남기기"></textarea>
+        <div class="button-wrap">
+            <button class="button is-success" onclick="post_comment()">의견 등록</button>
         </div>
     </div>
+</div>
 <hr class="comment_hr_second">
+
+<section class="section">
+    <div id="comment-box" class="container">
+        <div class="box">
+            <article class="media">
+                <div class="media-left">
+                    <a class="image is-64x64" href="#">
+                        <img class="is-rounded"
+                             src={{ url_for("static", filename="profile_pics/profile_placeholder.png") }} alt="Image">
+                    </a>
+                </div>
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong>홍길동</strong> <small>@username</small> <small>10분 전</small>
+                            <br>
+                            글을 적는 칸
+                        </p>
+                    </div>
+                    <nav class="level is-mobile">
+                        <div class="level-left">
+                            <a class="level-item is-sparta" aria-label="heart"
+                               onclick="toggle_like('', 'heart')">
+                                        <span class="icon is-small"><i class="fa fa-heart"
+                                                                       aria-hidden="true"></i></span>&nbsp;<span
+                                    class="like-num">2.7k</span>
+                            </a>
+                        </div>
+
+                    </nav>
+                </div>
+            </article>
+        </div>
+
+    </div>
+</section>
 </body>
 </html>
