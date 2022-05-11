@@ -81,6 +81,13 @@ class DetailContents():
 class Posts():
     @staticmethod
     def add_view_data(doc):           # detail_control에서 사용
-        db.visit_log.insert_one(doc)
+        news_db = client.news_data    # 뉴스 db에 조회수 1 더하기
+        news_db.news_data.update_one({"post_id": int(doc['post_id'])}, {'$set': {'view':(Posts.count_view(int(doc['post_id']))+1)}})
+        db.visit_log.insert_one(doc)  # visit_log에 방문 기록 작성
         return True
 
+    @staticmethod
+    def count_view(post_id):
+        news_db = client.news_data
+        view = news_db.news_data.find_one({'post_id': post_id})['view']
+        return view
