@@ -1,6 +1,7 @@
 import jwt
 from flask import Flask, render_template, jsonify, request, Blueprint, url_for, redirect
 
+
 application = Flask(__name__)
 
 from pymongo import MongoClient
@@ -33,11 +34,19 @@ def save_comment():
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     user_info = db.users.find_one({"user_id": payload["id"]})
+    print(user_info)
 
     # 클라이언트로부터 데이터 받아오기
     comment_receive = request.form['comment_give']
     date_receive = request.form["date_give"]
     id_receive = request.form["id_give"]
+
+    comment_count = db.comments.estimated_document_count()
+
+    if comment_count == 0:
+        max_value = 1
+    else:
+        max_value = db.comments.find_one(sort=[("idx", -1)])['idx'] + 1
 
     doc = {
         "comment": comment_receive,
@@ -45,7 +54,8 @@ def save_comment():
         "nick_name": user_info['nick_name'],
         "date": date_receive,
         "profile_pic_real": user_info['profile_pic_real'],
-        "post_id": id_receive
+        "post_id": id_receive,
+        "idx": max_value
     }
 
     db.comments.insert_one(doc)
@@ -54,17 +64,13 @@ def save_comment():
 
 @detail.route('/comment/delete', methods=['POST'])
 def delete_comment():
-    post_id_receive = request.form['id_give']
-    # 토큰으로 유저 정보 가져오기
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     user_info = db.users.find_one({"user_id": payload["id"]})
+    comment_receive = request.form['comment_give']
 
-    comment = db.comments.find_one({'user_id': user_info['user_id'], 'post_id': post_id_receive})
-    comment_id = comment.inserted_id
-
-    db.comments.delete_one({"_id": comment_id})
-
+    comment = db.comments.find_one({"user_id": user_info['user_id']})
+    db.comments.delete_one({'idx': comment['idx']})
     return jsonify({'msg': '의견이 삭제 되었습니다.'})
 
 
