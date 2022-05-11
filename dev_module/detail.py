@@ -19,12 +19,13 @@ detail = Blueprint('detail', __name__)
 @detail.route("/detail/<post_id>")
 def detail_load(post_id):
     post = news.find_one({'post_id': int(post_id)}, {'_id': False})
+    comment_count = db.comments.count_documents({'post_id': post_id})
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"user_id": payload["id"]})
         status = True
-        return render_template('detail.html', post=post, status=status, user_info=user_info)
+        return render_template('detail.html', post=post, status=status, user_info=user_info, comment_count=comment_count)
     except:
         status = False
         return redirect(url_for("home", msg="로그인을 해주세요!"))
