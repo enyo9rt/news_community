@@ -49,35 +49,76 @@
     </div>
 </nav>
 
-<div class="news_wrap box">
-    <div class="news_title">{{ post.title }}</div>
+<div class="news_wrap box fixed">
+    <div class="news_title title is-5"><strong><h4>{{ post.title }}</h4></strong></div>
+
+    <div class="news_icon level-right">
+        <div class="news_url level-item">
+            <a href="{{ post.news_url }}" target="_blank">
+                <span class="icon is-small"><i class="fa-solid fa-link"></i></span>
+            </a>
+        </div>
+        <div id="bookmark" class="bookmark level-item">
+            <div id="{{ post.post_id }}">
+                <a class="is-sparta" aria-label="bookmark"
+                   onclick="toggle_bookmark({{ post.post_id }})">
+                                                <span class="icon is-small"><i class="fa fa-solid fa-bookmark-o"
+                                                                               aria-hidden="true"></i></span>
+                </a>
+            </div>
+        </div>
+    </div>
     <span class="news_photo"><img src="{{ post.image_url }}" alt="Image"></span>
-    <div class="news_summary">{{ post.summary }}</div>
+    <div class="news_summary" style="white-space: pre-line">{{ post.summary|safe }}</div>
 </div>
 
-<div id="bookmark" class="bookmark">
-    <div id="{{ post.post_id }}">
-        <a class="level-item is-sparta" aria-label="bookmark"
-           onclick="toggle_bookmark({{ post.post_id }})">
-                                        <span class="icon is-small"><i class="fa fa-solid fa-bookmark-o"
-                                                                       aria-hidden="true"></i></span>
-        </a></div>
-</div>
+<hr class="comment_hr fixed">
 
-<hr class="comment_hr">
-<div class="comment_head"><h1>의견을 남겨주세요 👍🏻</h1></div>
-<div class="comment_wrap">
+<div class="comment_wrap fixed">
     <div class="control">
-        <textarea id="comment" class="textarea is-hovered" placeholder="의견 남기기"></textarea>
+        <textarea id="comment" class="textarea is-hovered" placeholder="의견을 남겨주세요 👍🏻"></textarea>
+
         <div class="button-wrap">
             <button class="button is-success" onclick="post_comment()">의견 등록</button>
         </div>
     </div>
 </div>
-<hr class="comment_hr_second">
+<hr class="comment_hr_second fixed">
+
 
 <section class="section">
-    <div id="comment-box" class="container">
+    <div class="comment_box_head fixed level">
+        <div class="comments_count level-left">
+            <p class="subtitle is-5">
+                <strong>0</strong>
+            </p>&nbsp;comments
+        </div>
+        <div class="dropdown is-right is-hoverable level-right">
+            <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                    <span>댓글 정렬</span>
+                    <span class="icon is-small">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                <div class="dropdown-content">
+                    <a href="#" class="dropdown-item">
+                        최신 순
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        오래된 순
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        좋아요 순
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="comment-box" class="container fixed">
         <div class="box">
             <article class="media">
                 <div class="media-left">
@@ -109,5 +150,6 @@
         </div>
     </div>
 </section>
+
 </body>
 </html>
