@@ -33,7 +33,7 @@
         let now_post_id = "{{ post['post_id'] }}"
         let sorting_status_eng = "new"
         $(document).ready(function () {
-            comments_get("", now_post_id)
+            comments_get("", now_post_id, sorting_status_eng)
             bookmarked(now_post_id)
         })
     </script>

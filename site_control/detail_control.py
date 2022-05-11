@@ -160,8 +160,9 @@ class DetailControl():
             bookmarked_posts = []
             for r in bookmark_post_ids:
                 if r:
-                    r["bookmark_post_id"] = int(r["bookmark_post_id"])
+                    print(DetailContents.find_post(r["bookmark_post_id"]))
                     bookmarked_posts.append(DetailContents.find_post(r["bookmark_post_id"]))
-            return jsonify({"result": "success", "msg": "posts_get", "posts": bookmarked_posts.reverse()})
+            print(bookmarked_posts)
+            return jsonify({"result": "success", "msg": "posts_get", "posts": bookmarked_posts})
         except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
             return redirect(url_for("home"))
