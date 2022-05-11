@@ -64,13 +64,8 @@ def save_comment():
 
 @detail.route('/comment/delete', methods=['POST'])
 def delete_comment():
-    token_receive = request.cookies.get('mytoken')
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    user_info = db.users.find_one({"user_id": payload["id"]})
-    comment_receive = request.form['comment_give']
-
-    comment = db.comments.find_one({"user_id": user_info['user_id']})
-    db.comments.delete_one({'idx': comment['idx']})
+    comment_idx_receive = request.form['comment_idx_give']
+    db.comments.delete_one({'idx': int(comment_idx_receive)})
     return jsonify({'msg': '의견이 삭제 되었습니다.'})
 
 
