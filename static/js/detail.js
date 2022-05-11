@@ -1,3 +1,29 @@
+// 정렬 옵션 선택 - ye
+
+function set_sorting_method(sorting_item) {
+    let status_text = $(sorting_item).text();
+    let sorting_txt = document.getElementById("sort_comments_txt");
+    if (status_text == "") {
+        sorting_txt.textContent = "댓글 정렬";
+    } else {
+        sorting_txt.textContent = status_text;
+    }
+    let sorting_txt_selected = document.getElementById("sort_comments_txt").textContent;
+    sorting_txt_selected = sorting_txt_selected.trim();
+    if (sorting_txt_selected == "오래된 순") {
+        sorting_status_eng = "old"
+        console.log("오래된 순, 선택")
+    } else if (sorting_txt_selected == "좋아요 순") {
+        sorting_status_eng = "like"
+        console.log("좋아요 순, 선택")
+    } else if (sorting_txt_selected == "최신 순") {
+        sorting_status_eng = "new"
+        console.log("최신 순, 선택")
+    }
+    console.log(sorting_status_eng, "sorting_status_eng")
+    comments_get("", now_post_id)
+}
+
 // 댓글 작성 함수 -hj
 function post_comment() {
     const comment_value = $('#comment').val()
@@ -13,7 +39,7 @@ function post_comment() {
         success: function (response) {
             alert(response['msg'])
             $('#comment').val('')
-            comments_get("",now_post_id)
+            comments_get("", now_post_id)
         }
     })
 }
@@ -55,14 +81,13 @@ function comments_get(user_id, post_id) {
     console.log(user_id, post_id)
     if (user_id == undefined) {
         user_id = ""
-    }
-    else if (post_id == undefined) {
+    } else if (post_id == undefined) {
         post_id = ""
     }
     $("#comment-box").empty()
     $.ajax({
         type: "GET",
-        url: `/comments_get?user_id_give=${user_id}&post_id_give=${post_id}`,
+        url: `/comments_get?user_id_give=${user_id}&post_id_give=${post_id}&sorting_status_give=${sorting_status_eng}`,
         data: {},
         success: function (response) {
             if (response["result"] == "success") {
