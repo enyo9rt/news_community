@@ -1,7 +1,28 @@
+// 댓글 정렬 함수 - ye
+function set_sorting_method(sorting_item) {
+    let status_text = $(sorting_item).text();
+    let sorting_txt = document.getElementById("sort_comments_txt");
+    if (status_text == "") {
+        sorting_txt.textContent = "댓글 정렬";
+    } else {
+        sorting_txt.textContent = status_text;
+    }
+    let sorting_txt_selected = document.getElementById("sort_comments_txt").textContent;
+    sorting_txt_selected = sorting_txt_selected.trim();
+    if (sorting_txt_selected == "오래된 순") {
+        sorting_status_eng = "old"
+    } else if (sorting_txt_selected == "좋아요 순") {
+        sorting_status_eng = "like"
+    } else if (sorting_txt_selected == "최신 순") {
+        sorting_status_eng = "new"
+    }
+    console.log(sorting_status_eng, "sorting_status_eng")
+    comments_get("", now_post_id)
+}
+
 // 댓글 작성 함수 -hj
 function post_comment() {
     const date = new Date().toISOString()
-    const comment_value = $('#comment').val()
     $.ajax({
         type: "POST",
         url: "/comment",
@@ -77,7 +98,7 @@ function comments_get(user_id, post_id) {
     $("#comment-box").empty()
     $.ajax({
         type: "GET",
-        url: `/comments_get?user_id_give=${user_id}&post_id_give=${post_id}`,
+        url: `/comments_get?user_id_give=${user_id}&post_id_give=${post_id}&sorting_status_give=${sorting_status_eng}`,
         data: {},
         success: function (response) {
             if (response["result"] == "success") {
@@ -98,7 +119,7 @@ function comments_get(user_id, post_id) {
                                             <div class="media-content">
                                                 <div class="content">
                                                     <p>
-                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small><small onclick="delete_comment(${comment['idx']})" class="delete_word">삭제</small>
+                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small><small onclick="delete_comment()" class="delete_word">삭제</small>
                                                         <br>
                                                         ${comment['comment']}
                                                     </p>

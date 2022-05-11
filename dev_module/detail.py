@@ -7,6 +7,8 @@ application = Flask(__name__)
 from pymongo import MongoClient
 from DB_ADMIN import account
 
+from operator import itemgetter
+
 client = MongoClient(account.API_KEY)
 db = client.Haromony
 news = client.news_data.news_data
@@ -134,16 +136,28 @@ def comments_get():
         # 매개변수로 받은 user_id 유무에 따라 find 조건 걸어주기
         user_id_receive = request.args.get("user_id_give")
         post_id_receive = request.args.get("post_id_give")
+        sorting_status_receive = request.args.get("sorting_status_give")
         # user_id가 없으면 post_id와 매칭되는 댓글 가져오기
-        if user_id_receive=="":
+        print("sorting_status_receive 받았고, 변환함", sorting_status_receive)
+        if user_id_receive == "":
             comments = list(db.comments.find({"post_id": post_id_receive}).sort("date", -1).limit(20))
         else:
             comments = list(db.comments.find({"user_id": user_id_receive}).sort("date", -1).limit(20))
+
         for comment in comments:
             comment["_id"] = str(comment["_id"])
             # 좋아요 갯수, 여부 확인
             comment["count_like"] = db.action.count_documents({"like_comment_id": comment["_id"]})
             comment["like_by_me"] = bool(db.action.find_one({"like_comment_id": comment["_id"], "user_id": user_info}))
+
+        # 정렬
+        if sorting_status_receive == "new":
+            comments = sorted(comments, key=itemgetter('date'), reverse=True)
+        elif sorting_status_receive == "old":
+            comments = sorted(comments, key=itemgetter('date'))
+        elif sorting_status_receive == "like":
+            comments = sorted(comments, key=itemgetter('count_like', 'date'), reverse=True)
+
         return jsonify({"result": "success", "msg": "comments_get", "comments": comments})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
