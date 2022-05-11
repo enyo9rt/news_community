@@ -4,26 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>할머니의 따뜻한 사랑</title>
+
     <!-- link 모음 -->
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <!-- Font Awesome CSS -->
-    <script src="https://kit.fontawesome.com/f6788aacd4.js" crossorigin="anonymous"></script>
     <!-- Googole Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Do+Hyeon&family=Nanum+Gothic:wght@400;700&display=swap"
           rel="stylesheet">
 
     <link rel="stylesheet" href="../static/base.css">
     <link rel="stylesheet" href="../static/detail.css">
 
-
     <!-- script 모음 -->
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/js/detail.js"></script>
-    <script src="../static/js/profile_about.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <!-- Font Awesome CSS -->
+    <script src="https://kit.fontawesome.com/f6788aacd4.js" crossorigin="anonymous"></script>
+
     <script src="../static/js/ui.js"></script>
+    <script src="../static/js/weather_api.js"></script>
+    <script src="../static/js/listing.js"></script>
+    <script src="../static/js/profile_about.js"></script>
+    <script src="../static/js/detail.js"></script>
     <script>
         let now_post_id = "{{ post['post_id'] }}"
         $(document).ready(function () {
@@ -37,32 +42,37 @@
 <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
-            <img src="../static/logo.png"/>
-            <strong class="navbar_text"
-                    style="">Team. harmony</strong>
+            <small class="navbar_team">TEAM.</small>
+            <div class="navbar_text">harmony</div>
         </a>
     </div>
-    <div class="navbar_icon">
-        <span class="profile_icon"><i class="fa-regular fa-user"></i></span>
-        <span class="logout_icon"><i class="fa-solid fa-right-from-bracket"
-                                     aria-hidden="true"></i></span>
-    </div>
+        <div class="navbar_icon">
+            {% if status == False %}
+                <a class="login_icon" onclick="window.location.href = '/login'"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+            {% else %}
+                <a class="profile_icon" href="/profile/{{ user_info.user_id }}"><i class="fa-regular fa-user"></i></a>
+                <a class="logout_icon" onclick="sign_out()"><i class="fa-solid fa-right-from-bracket"
+                                             aria-hidden="true"></i></a>
+            {% endif %}
+        </div>
 </nav>
 
 <div class="news_wrap box fixed">
     <div class="news_title title is-5"><strong><h4>{{ post.title }}</h4></strong></div>
-
+    <div class="news_time level-left">
+        <small>{{ post.write_time }}</small>
+    </div>
     <div class="news_icon level-right">
         <div class="news_url level-item">
             <a href="{{ post.news_url }}" target="_blank">
-                <span class="icon is-small"><i class="fa-solid fa-link"></i></span>
+                <span class="icon is-small"><i class="icon_ fa-solid fa-link"></i></span>
             </a>
         </div>
         <div id="bookmark" class="bookmark level-item">
             <div id="{{ post.post_id }}">
                 <a class="is-sparta" aria-label="bookmark"
                    onclick="toggle_bookmark({{ post.post_id }})">
-                                                <span class="icon is-small"><i class="fa fa-solid fa-bookmark-o"
+                                                <span class="icon is-small"><i class="icon_ fa fa-solid fa-bookmark-o"
                                                                                aria-hidden="true"></i></span>
                 </a>
             </div>
@@ -79,7 +89,7 @@
         <textarea id="comment" class="textarea is-hovered" placeholder="의견을 남겨주세요 👍🏻"></textarea>
 
         <div class="button-wrap">
-            <button class="button is-success" onclick="post_comment()">의견 등록</button>
+            <button class="button post_comment" onclick="post_comment()">의견 등록</button>
         </div>
     </div>
 </div>
@@ -91,8 +101,10 @@
         <div class="comments_count level-left">
             <p class="subtitle is-5">
                 <strong>0</strong>
-            </p>&nbsp;comments
+            </p>
+            <small>&nbsp;comments</small>
         </div>
+
         <div class="dropdown is-right is-hoverable level-right">
             <div class="dropdown-trigger">
                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">

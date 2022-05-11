@@ -1,7 +1,5 @@
-body {
-    background-color: rgba(114, 168, 110, 0.8);;
-    min-height: 100vh;
-		padding-top: 3.25rem;
+.navbar {
+    margin-top: -13px;
 }
 
 .section {
@@ -39,4 +37,8 @@ input::-webkit-calendar-picker-indicator {
     object-fit:cover;
     width:100%;
     height:100%;
+}
+
+.bookmark_post {
+    text-align: center;
 }

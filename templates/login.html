@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <!-- Webpage Title -->
-    <title>할머니의 따뜻한 사랑</title>
-
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>할머니의 따뜻한 사랑</title>
 
+    <!-- link 모음 -->
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="stylesheet" href="../static/login.css" />
+    <!-- Googole Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Do+Hyeon&amp;display=swap" rel="stylesheet">
 
-    <!-- JS -->
+    <link rel="stylesheet" href="/static/base.css"/>
+    <link rel="stylesheet" href="../static/login.css" />
+
+    <!-- script 모음 -->
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <!-- Font Awesome CSS -->
+    <script src="https://kit.fontawesome.com/f6788aacd4.js" crossorigin="anonymous"></script>
 
     <script>
         // {% if msg %}
@@ -167,14 +170,17 @@
         }
     </script>
 </head>
-<body>
-<header>
-    <div class="inner">
-        <div class="head-container">
-            <div class="head-brand"><a href="/">Team. harmony</a></div>
-        </div>
+
+<body class="has-navbar-fixed-top">
+<nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <small class="navbar_team">TEAM.</small>
+            <div class="navbar_text">harmony</div>
+        </a>
     </div>
-</header>
+</nav>
+
 <div class="login-wrap">
     <section class="hero is-small is-white">
         <div class="hero-body">

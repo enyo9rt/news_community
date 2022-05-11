@@ -27,7 +27,7 @@ def detail_load(post_id):
         return render_template('detail.html', post=post, status=status, user_info=user_info)
     except:
         status = False
-        return render_template('index.html', status=status)
+        return redirect(url_for("home", msg="로그인을 해주세요!"))
 
 
 @detail.route('/comment', methods=['POST'])
@@ -92,7 +92,6 @@ def like_update():
         else:
             db.action.delete_one(doc)
         count = db.action.count_documents({"like_comment_id": comment_id_receive})
-        print(count)
         return jsonify({"result": "success", "count": count})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
@@ -177,6 +176,28 @@ def bookmarked():
         post_id_receive = request.args.get("post_id_give")
         bookmark_by_me = bool(db.action.find_one({"bookmark_post_id": post_id_receive, "user_id": user_info}))
         return jsonify({"result": "success", "bookmark_by_me": bookmark_by_me})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
+
+
+@detail.route('/posts_get', methods=['GET'])
+def posts_get():
+    """ -yj
+    DB의 news_data 컬렉션에서 북마크한 기사 리스트를 최근 시간 순으로 가져오기
+    :return: 댓글 리스트
+    """
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        # 매개변수로 받은 user_id가 북마크한 기사 ID를 찾아서 해당 기사들만 가져오기
+        user_id_receive = request.args.get("user_id_give")
+        bookmark_post_ids = list(db.action.find({"user_id": user_id_receive}, {"_id": 0, "bookmark_post_id": 1}).sort("date", -1).limit(20))
+        bookmarked_posts = []
+        for r in bookmark_post_ids:
+            if r:
+                r["bookmark_post_id"] = int(r["bookmark_post_id"])
+                bookmarked_posts.append(news.find_one({"post_id": r["bookmark_post_id"]}, {"_id": 0}))
+        return jsonify({"result": "success", "msg": "posts_get", "posts": bookmarked_posts})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
