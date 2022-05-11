@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from DB_ADMIN import account
+from CONFIG import account
 
 client = MongoClient(account.API_KEY)
 db = client.news_data

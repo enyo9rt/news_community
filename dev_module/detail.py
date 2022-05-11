@@ -5,7 +5,7 @@ from flask import Flask, render_template, jsonify, request, Blueprint, url_for, 
 application = Flask(__name__)
 
 from pymongo import MongoClient
-from DB_ADMIN import account
+from CONFIG import account
 
 from operator import itemgetter
 
