@@ -2,9 +2,9 @@ from flask import render_template, request, Blueprint
 from site_control.join_control import JoinAdmin
 import hashlib
 
-
-
 join_page = Blueprint('join', __name__)
+
+
 @join_page.route('/login')
 def login():
     msg = request.args.get("msg")

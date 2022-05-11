@@ -7,7 +7,7 @@ news = client.news_data.news_data
 
 class DBAdmin():
     @staticmethod
-    def get_mongo_connecter():
+    def get_mongo_connector():
         return db
 
 class UserAdmin():
@@ -16,12 +16,17 @@ class UserAdmin():
         return db.users.find_one({column: target})
 
     @staticmethod
-    def is_custmoer_check(user_id, pw_hash):  # join_control: checkdup()에 사용
+    def is_customer_check(user_id, pw_hash):  # join_control: checkdup()에 사용
         return db.users.find_one({'user_id': user_id, 'password': pw_hash})
 
     @staticmethod
     def user_signup_db(doc): # join_control에 사용
         db.users.insert_one(doc)
+
+    @staticmethod
+    def users_update_one(payload_id, new_doc):
+        return db.users.update_one({'user_id': payload_id}, {'$set': new_doc})
+
 
 class DetailContents():
     @staticmethod

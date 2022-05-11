@@ -8,9 +8,9 @@ import jwt
 class JoinAdmin():
     @staticmethod
     def sign_in(user_id, pw_hash):
-        is_custmoer = UserAdmin.is_custmoer_check(user_id, pw_hash)
+        is_customer = UserAdmin.is_custmoer_check(user_id, pw_hash)
 
-        if is_custmoer is not None:
+        if is_customer is not None:
             payload = {
                 'id': user_id,
                 'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
@@ -20,7 +20,6 @@ class JoinAdmin():
         # 찾지 못하면
         else:
             return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
 
     @staticmethod
     def sign_up(user_id, user_pw):
@@ -34,7 +33,6 @@ class JoinAdmin():
         }
         UserAdmin.user_signup_db(doc)
         return jsonify({'result': 'success'})
-
 
     @staticmethod
     def check_dup(user_id):

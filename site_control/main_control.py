@@ -3,6 +3,7 @@ from CONFIG.account import SECRET_KEY
 from model.mongo import UserAdmin
 import jwt
 
+
 def home_render():
     token_receive = request.cookies.get('mytoken')  # 클라이언트로부터 mytoekn에 담겨 온 토큰 정보 받아주기
     try:
