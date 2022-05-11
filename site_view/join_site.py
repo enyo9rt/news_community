@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint
-from site_control.join_control import join_admin
+from site_control.join_control import JoinAdmin
 import hashlib
 
 
@@ -17,7 +17,7 @@ def sign_in():
     username_receive = request.form['username_give']
     password_receive = request.form['password_give']
     pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
-    return join_admin.sign_in(username_receive, pw_hash)
+    return JoinAdmin.sign_in(username_receive, pw_hash)
 
 
 @join_page.route('/sign_up/save', methods=['POST'])
@@ -26,10 +26,10 @@ def sign_up():
     password_receive = request.form['password_give']
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
 
-    return join_admin.sign_up(username_receive, password_hash)
+    return JoinAdmin.sign_up(username_receive, password_hash)
 
 
 @join_page.route('/sign_up/check_dup', methods=['POST'])
 def check_dup():
     username_receive = request.form['username_give']
-    return join_admin.check_dup(username_receive)
+    return JoinAdmin.check_dup(username_receive)
