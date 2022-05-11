@@ -31,6 +31,7 @@
     <script src="../static/js/detail.js"></script>
     <script>
         let now_post_id = "{{ post['post_id'] }}"
+        let sorting_status_eng = "new"
         $(document).ready(function () {
             comments_get("", now_post_id)
             bookmarked(now_post_id)
@@ -46,15 +47,16 @@
             <div class="navbar_text">harmony</div>
         </a>
     </div>
-        <div class="navbar_icon">
-            {% if status == False %}
-                <a class="login_icon" onclick="window.location.href = '/login'"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
-            {% else %}
-                <a class="profile_icon" href="/profile/{{ user_info.user_id }}"><i class="fa-regular fa-user"></i></a>
-                <a class="logout_icon" onclick="sign_out()"><i class="fa-solid fa-right-from-bracket"
-                                             aria-hidden="true"></i></a>
-            {% endif %}
-        </div>
+    <div class="navbar_icon">
+        {% if status == False %}
+            <a class="login_icon" onclick="window.location.href = '/login'"><i
+                    class="fa-solid fa-arrow-right-to-bracket"></i></a>
+        {% else %}
+            <a class="profile_icon" href="/profile/{{ user_info.user_id }}"><i class="fa-regular fa-user"></i></a>
+            <a class="logout_icon" onclick="sign_out()"><i class="fa-solid fa-right-from-bracket"
+                                                           aria-hidden="true"></i></a>
+        {% endif %}
+    </div>
 </nav>
 
 <div class="news_wrap box fixed">
@@ -108,7 +110,7 @@
         <div class="dropdown is-right is-hoverable level-right">
             <div class="dropdown-trigger">
                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-                    <span>댓글 정렬</span>
+                    <span id="sort_comments_txt">댓글 정렬</span>
                     <span class="icon is-small">
                         <i class="fas fa-angle-down" aria-hidden="true"></i>
                     </span>
@@ -116,13 +118,13 @@
             </div>
             <div class="dropdown-menu" id="dropdown-menu3" role="menu">
                 <div class="dropdown-content">
-                    <a href="#" class="dropdown-item">
+                    <a href="#" class="dropdown-item" onclick="set_sorting_method(this)">
                         최신 순
                     </a>
-                    <a href="#" class="dropdown-item">
+                    <a id=sort_old href="#" class="dropdown-item" onclick="set_sorting_method(this)">
                         오래된 순
                     </a>
-                    <a href="#" class="dropdown-item">
+                    <a id=sort_like href="#" class="dropdown-item" onclick="set_sorting_method(this)">
                         좋아요 순
                     </a>
                 </div>
