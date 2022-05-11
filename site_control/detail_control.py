@@ -9,12 +9,13 @@ class DetailControl():
     @staticmethod
     def detail_render(post_id):
         post = DetailContents.find_post(post_id)
+        count_comments = DetailContents.count_comments(post_id)
         token_receive = request.cookies.get('mytoken')  # 클라이언트로부터 mytoekn에 담겨 온 토큰 정보 받아주기
         try:
             payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
             user_info = UserAdmin.users_find_one("user_id", payload["id"])
             status = True
-            return render_template('detail.html', post=post, status=status, user_info=user_info)
+            return render_template('detail.html', post=post, status=status, user_info=user_info, count_comments=count_comments)
         except :
             status = False
             return render_template('index.html', msg="로그인을 해주세요!")

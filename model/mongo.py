@@ -33,6 +33,10 @@ class DetailContents():
         return db.comments.estimated_document_count()
 
     @staticmethod
+    def count_comments(post_id):   # detail_control에서 사용
+        return db.comments.count_documents({'post_id': post_id})
+
+    @staticmethod
     def plus_comment_id():   # detail_control에서 사용
         return db.comments.find_one(sort=[("idx", -1)])['idx'] + 1
 
