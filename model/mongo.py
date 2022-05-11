@@ -76,3 +76,11 @@ class DetailContents():
     @staticmethod
     def find_bookmark_post(user_id):   # detail_control에서 사용
         return db.action.find({"user_id": user_id}, {"_id": False, "bookmark_post_id": True})
+
+
+class Posts():
+    @staticmethod
+    def add_view_data(doc):           # detail_control에서 사용
+        db.visit_log.insert_one(doc)
+        return True
+

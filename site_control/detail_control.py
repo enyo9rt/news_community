@@ -1,6 +1,7 @@
 from flask import render_template, request, jsonify, redirect, url_for
+from datetime import datetime
 from CONFIG.account import SECRET_KEY
-from model.mongo import UserAdmin, DetailContents
+from model.mongo import UserAdmin, DetailContents, Posts
 from operator import itemgetter
 import jwt
 
@@ -15,6 +16,14 @@ class DetailControl():
             payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
             user_info = UserAdmin.users_find_one("user_id", payload["id"])
             status = True
+
+            #포스트 접속 기록 db 저장: 포스트_id, 유저_id, 접속 시간
+            doc = {
+                "post_id": post_id,
+                "user_id": payload["id"],
+                "use_time": datetime.now()
+            }
+            Posts.add_view_data(doc)
             return render_template('detail.html', post=post, status=status, user_info=user_info, count_comments=count_comments)
         except :
             status = False
