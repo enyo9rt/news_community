@@ -1,5 +1,8 @@
-// 정렬 옵션 선택 - ye
+function comment_value() {
+    return $('#comment').val()
+}
 
+// 댓글 정렬 함수 - ye
 function set_sorting_method(sorting_item) {
     let status_text = $(sorting_item).text();
     let sorting_txt = document.getElementById("sort_comments_txt");
@@ -12,13 +15,10 @@ function set_sorting_method(sorting_item) {
     sorting_txt_selected = sorting_txt_selected.trim();
     if (sorting_txt_selected == "오래된 순") {
         sorting_status_eng = "old"
-        console.log("오래된 순, 선택")
     } else if (sorting_txt_selected == "좋아요 순") {
         sorting_status_eng = "like"
-        console.log("좋아요 순, 선택")
     } else if (sorting_txt_selected == "최신 순") {
         sorting_status_eng = "new"
-        console.log("최신 순, 선택")
     }
     console.log(sorting_status_eng, "sorting_status_eng")
     comments_get("", now_post_id)
@@ -32,14 +32,28 @@ function post_comment() {
         type: "POST",
         url: "/comment",
         data: {
-            comment_give: comment_value,
+            comment_give: comment_value(),
             date_give: date,
-            id_give: now_post_id
+            id_give: now_post_id,
         },
         success: function (response) {
             alert(response['msg'])
             $('#comment').val('')
-            comments_get("", now_post_id)
+            comments_get("",now_post_id)
+        }
+    })
+}
+
+function delete_comment() {
+    $.ajax({
+        type: "POST",
+        url: "/comment/delete",
+        data: {
+            comment_give: comment_value()
+        },
+        success: function (response) {
+            alert(response['msg'])
+            window.location.reload()
         }
     })
 }
@@ -78,7 +92,7 @@ function num2str(count) {
 }
 
 function comments_get(user_id, post_id) {
-    console.log(user_id, post_id)
+    // console.log(user_id, post_id)
     if (user_id == undefined) {
         user_id = ""
     } else if (post_id == undefined) {
@@ -108,7 +122,7 @@ function comments_get(user_id, post_id) {
                                             <div class="media-content">
                                                 <div class="content">
                                                     <p>
-                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small>
+                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small><small onclick="delete_comment()" class="delete_word">삭제</small>
                                                         <br>
                                                         ${comment['comment']}
                                                     </p>
@@ -133,7 +147,7 @@ function comments_get(user_id, post_id) {
 }
 
 function bookmarked(post_id) {
-    console.log(post_id)
+    // console.log(post_id)
     $("#bookmark").empty()
     $.ajax({
         type: "GET",
@@ -160,7 +174,7 @@ function bookmarked(post_id) {
 
 // 좋아요, 좋아요 취소
 function toggle_like(comment_id) {
-    console.log(comment_id)
+    // console.log(comment_id)
     let $a_like = $(`#${comment_id} a[aria-label='like']`)
     let $i_like = $(`#${comment_id} a[aria-label='like']`).find("i")
     if ($i_like.hasClass("fa-heart")) {
