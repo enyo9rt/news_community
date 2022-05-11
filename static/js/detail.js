@@ -1,19 +1,34 @@
 // 댓글 작성 함수 -hj
 function post_comment() {
-    const comment_value = $('#comment').val()
     const date = new Date().toISOString()
+    const comment_value = $('#comment').val()
     $.ajax({
         type: "POST",
         url: "/comment",
         data: {
             comment_give: comment_value,
             date_give: date,
-            id_give: now_post_id
+            id_give: now_post_id,
         },
         success: function (response) {
             alert(response['msg'])
             $('#comment').val('')
             comments_get("",now_post_id)
+        }
+    })
+}
+
+function delete_comment(comment_idx) {
+    console.log(comment_idx)
+    $.ajax({
+        type: "POST",
+        url: "/comment/delete",
+        data: {
+            comment_idx_give: comment_idx
+        },
+        success: function (response) {
+            alert(response['msg'])
+            window.location.reload()
         }
     })
 }
@@ -53,7 +68,7 @@ function num2str(count) {
 
 // 댓글 리스팅
 function comments_get(user_id, post_id) {
-    console.log(user_id, post_id)
+    // console.log(user_id, post_id)
     if (user_id == undefined) {
         user_id = ""
     }
@@ -84,7 +99,7 @@ function comments_get(user_id, post_id) {
                                             <div class="media-content">
                                                 <div class="content">
                                                     <p>
-                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small>
+                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small><small onclick="delete_comment(${comment['idx']})" class="delete_word">삭제</small>
                                                         <br>
                                                         ${comment['comment']}
                                                     </p>
@@ -99,7 +114,7 @@ function comments_get(user_id, post_id) {
 
                                                 </nav>
                                             </div>
-                                        </article>
+                                        </article>                                     
                                     </div>`
                     $("#comment-box").append(temp_html)
                 }
@@ -110,7 +125,7 @@ function comments_get(user_id, post_id) {
 
 // 북마크 여부 확인
 function bookmarked(post_id) {
-    console.log(post_id)
+    // console.log(post_id)
     $("#bookmark").empty()
     $.ajax({
         type: "GET",
@@ -136,7 +151,7 @@ function bookmarked(post_id) {
 
 // 좋아요, 좋아요 취소
 function toggle_like(comment_id) {
-    console.log(comment_id)
+    // console.log(comment_id)
     let $a_like = $(`#${comment_id} a[aria-label='like']`)
     let $i_like = $(`#${comment_id} a[aria-label='like']`).find("i")
     if ($i_like.hasClass("fa-heart")) {

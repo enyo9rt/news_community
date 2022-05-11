@@ -105,3 +105,12 @@
     border: 0;
     outline: 0;
 }
+
+.delete_word {
+    margin-left: 20px;
+}
+
+.delete_word:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
