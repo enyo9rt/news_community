@@ -1,6 +1,7 @@
 from flask import render_template, request, jsonify, redirect, url_for
 from model.mongo import UserAdmin
 from werkzeug.utils import secure_filename
+from model.mongo import DetailContents
 import jwt
 
 SECRET_KEY = 'test'
@@ -43,4 +44,20 @@ class ProfileHandler:
             print('image save fail')
             return redirect(url_for("home"))
 
+    @staticmethod
+    def posts_get(user_id_receive):
+        """ -yj
+        DB의 news_data 컬렉션에서 북마크한 기사 리스트를 최근 시간 순으로 가져오기
+        :return: 댓글 리스트
+        """
+        try:
+            # 매개변수로 받은 user_id가 북마크한 기사 ID를 찾아서 해당 기사들만 가져오기
+            bookmark_post_ids = list(DetailContents.find_bookmark_post(user_id_receive).sort("date", -1).limit(20))
+            bookmarked_posts = []
+            for r in bookmark_post_ids:
+                if r:
+                    bookmarked_posts.append(DetailContents.find_post(r["bookmark_post_id"]))
+            return jsonify({"result": "success", "msg": "posts_get", "posts": bookmarked_posts})
+        except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+            return redirect(url_for("home"))
 
