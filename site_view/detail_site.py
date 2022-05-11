@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from site_control.detail_control import DetailControl
+from site_control.profile_control import ProfileHandler
 
 detail_page = Blueprint('detail', __name__)
 
@@ -47,4 +48,4 @@ def bookmarked():
 @detail_page.route('/posts_get', methods=['GET'])
 def posts_get():
     user_id_receive = request.args.get("user_id_give")
-    return DetailControl.posts_get(user_id_receive)
+    return ProfileHandler.posts_get(user_id_receive)
