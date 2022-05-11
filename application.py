@@ -1,9 +1,8 @@
-from site_view import main_site, join_site
+from site_view import main_site, join_site, detail_site
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from pymongo import MongoClient
 from dev_module import weather
 from CONFIG import account
-from dev_module import detail
 from werkzeug.utils import secure_filename
 import jwt
 
@@ -11,8 +10,8 @@ application = Flask(__name__)
 # weather.py 파일로 날씨 관련 api 분리 후 가져오기
 application.register_blueprint(main_site.main_page)
 application.register_blueprint(join_site.join_page)
+application.register_blueprint(detail_site.detail_page)
 application.register_blueprint(weather.weather_api)
-application.register_blueprint(detail.detail)
 
 client = MongoClient(account.API_KEY)
 db = client.Haromony

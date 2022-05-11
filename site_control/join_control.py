@@ -5,7 +5,7 @@ from flask import jsonify
 import jwt
 
 
-class join_admin():
+class JoinAdmin():
     @staticmethod
     def sign_in(user_id, pw_hash):
         is_custmoer = UserAdmin.is_custmoer_check(user_id, pw_hash)

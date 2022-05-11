@@ -146,7 +146,6 @@ function comments_get(user_id, post_id) {
 
 // 북마크 여부 확인
 function bookmarked(post_id) {
-    // console.log(post_id)
     $("#bookmark").empty()
     $.ajax({
         type: "GET",
