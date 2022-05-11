@@ -25,7 +25,7 @@ class DetailControl():
         # 토큰으로 유저 정보 가져오기
         token_receive = request.cookies.get('mytoken')
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = UserAdmin.users_find_one({"user_id": payload["id"]})
+        user_info = UserAdmin.users_find_one("user_id", payload["id"])
 
         if DetailContents.count_all_comments == 0:
             max_value = 1
