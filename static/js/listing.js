@@ -19,7 +19,7 @@ const listing = () => {
                 let image_url = news_list[i]['image_url'];
                 let html_data = `<div class="col">
                                         <div class="card h-100">
-                                            <img src=${image_url}
+                                            <img class="card-image-box" src=${image_url}
                                                  class="card-img-top">
                                             <div class="card-body">
                                                 <a href="/detail/${post_id}"><h5 class="card-title">${title}</h5></a>

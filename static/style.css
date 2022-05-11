@@ -176,7 +176,9 @@ a:hover {
   text-decoration: none;
   color: #fff;
 }
-
+.card-image-box{
+    height: 45%;
+}
 
 
 .head-container .head-brand a:hover {
