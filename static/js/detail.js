@@ -1,14 +1,12 @@
-function comment_value() {
-    return $('#comment').val()
-}
 // 댓글 작성 함수 -hj
 function post_comment() {
     const date = new Date().toISOString()
+    const comment_value = $('#comment').val()
     $.ajax({
         type: "POST",
         url: "/comment",
         data: {
-            comment_give: comment_value(),
+            comment_give: comment_value,
             date_give: date,
             id_give: now_post_id,
         },
@@ -20,12 +18,13 @@ function post_comment() {
     })
 }
 
-function delete_comment() {
+function delete_comment(comment_idx) {
+    console.log(comment_idx)
     $.ajax({
         type: "POST",
         url: "/comment/delete",
         data: {
-            comment_give: comment_value()
+            comment_idx_give: comment_idx
         },
         success: function (response) {
             alert(response['msg'])
@@ -99,7 +98,7 @@ function comments_get(user_id, post_id) {
                                             <div class="media-content">
                                                 <div class="content">
                                                     <p>
-                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small><small onclick="delete_comment()" class="delete_word">삭제</small>
+                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small><small onclick="delete_comment(${comment['idx']})" class="delete_word">삭제</small>
                                                         <br>
                                                         ${comment['comment']}
                                                     </p>
