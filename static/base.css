@@ -1,5 +1,5 @@
 body {
-    background-color: RGBA(246, 255, 245);
+    background-color: rgba(114, 168, 110, 0.8);
     min-height: 200vh;
 }
 
@@ -11,14 +11,29 @@ body {
 
 .navbar-brand {
     display: flex;
+    margin-top: 5px;
+}
+
+.navbar_team {
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 10px 0 0 10px;
+    color: #3f464d;
+    font-family: 'Rubik Mono One', sans-serif;
 }
 
 .navbar_text {
-    font-family: 'Stylish', sans-serif;
-    font-size: 0.8rem;
-    margin-left: 6px;
-    margin-top: 14px;
-    color: #3f464d;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    /*margin-left: 6px;*/
+    /*margin-top: -3px;*/
+    color: rgba(114, 168, 110, 0.8);
+    font-family: 'Rubik Mono One', sans-serif;
+    letter-spacing: 1.5px;
 }
 
 .image img {
@@ -35,12 +50,15 @@ body {
 
 .navbar_icon {
     display: flex;
+    flex-basis: 100px;
+    flex: 0 0 1;
     flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .profile_icon {
-    margin-top: 18px;
-    margin-right: 25px;
+    flex-basis: 38px;
     color: rgba(114, 168, 110, 0.8);
     transform: scale(1.4);
 }
@@ -50,8 +68,7 @@ body {
 }
 
 .logout_icon {
-    margin-top: 18px;
-    margin-right: 25px;
+    flex-basis: 35px;
     color: rgba(114, 168, 110, 0.8);
     transform: scale(1.4);
 }
@@ -61,8 +78,7 @@ body {
 }
 
 .login_icon {
-    margin-top: 18px;
-    margin-right: 25px;
+    flex-basis: 30px;
     color: rgba(114, 168, 110, 0.8);
     transform: scale(1.4);
 }
