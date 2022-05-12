@@ -17,7 +17,7 @@ function set_sorting_method(sorting_item) {
         sorting_status_eng = "new"
     }
     console.log(sorting_status_eng, "sorting_status_eng")
-    comments_get("", now_post_id)
+    comments_get("", now_post_id, sorting_status_eng)
 }
 
 // 댓글 작성 함수 -hj
@@ -88,7 +88,7 @@ function num2str(count) {
 }
 
 // 댓글 리스팅
-function comments_get(user_id, post_id) {
+function comments_get(user_id, post_id, sorting_status_eng) {
     // console.log(user_id, post_id)
     if (user_id == undefined) {
         user_id = ""
@@ -146,7 +146,6 @@ function comments_get(user_id, post_id) {
 
 // 북마크 여부 확인
 function bookmarked(post_id) {
-    // console.log(post_id)
     $("#bookmark").empty()
     $.ajax({
         type: "GET",
@@ -239,40 +238,5 @@ function toggle_bookmark(post_id) {
             }
         })
 
-    }
-}
-
-// 북마크 기사 가져오기
-function posts_get(user_id) {
-    $.ajax({
-            type: "GET",
-            url: `/posts_get?user_id_give=${user_id}`,
-            data: {},
-            success: function (response) {
-                console.log(response["msg"])
-                if (response["result"] == "success") {
-                    let posts = response["posts"]
-                    for (let i = 0; i < posts.length; i++) {
-                            let post = posts[i]
-                            let temp_html = `<div class="bookmark_post box" id="${post["post_id"]}">
-                                                <a href="/detail/${post["post_id"]}">${post["title"]}</a>
-                                            </div>`
-                            $("#comment-box").append(temp_html)
-                        }
-                }
-            }
-        })
-}
-
-// 프로필 탭
-function toggle_tab(type) {
-    console.log(type)
-    let $li_tab = $(`#${type}`)
-    if (`${type}`=="posts") {
-        $li_tab.addClass("is-active").siblings().removeClass("is-active")
-        posts_get(now_user_id)
-    } else if (`${type}`=="comments") {
-        $li_tab.addClass("is-active").siblings().removeClass("is-active")
-        comments_get(now_user_id,"")
     }
 }

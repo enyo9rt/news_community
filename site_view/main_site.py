@@ -10,6 +10,7 @@ main_page = Blueprint('main', __name__)
 def home():
     return main_control.home_render()
 
+
 @main_page.route("/news", methods=["GET"])
 def news_get():
     news_list = news_getter.get_news()

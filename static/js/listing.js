@@ -17,6 +17,7 @@ const listing = () => {
                 let title = news_list[i]['title'];
                 let contents = news_list[i]['explain']
                 let image_url = news_list[i]['image_url'];
+                let view = news_list[i]['view']
                 let html_data = `<div class="col">
                                         <div class="card h-100">
                                             <img class="card-image-box" src=${image_url}
@@ -24,7 +25,7 @@ const listing = () => {
                                             <div class="card-body">
                                                 <a href="/detail/${post_id}"><h5 class="card-title">${title}</h5></a>
                                                 <p class="card-text">${contents}</p>
-                                                <p class="mycomment">조회수 0</p>
+                                                <p class="mycomment">조회수: ${view}</p>
                                             </div>
                                         </div>
                                     </div>`;

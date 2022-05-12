@@ -33,7 +33,7 @@
         let now_post_id = "{{ post['post_id'] }}"
         let sorting_status_eng = "new"
         $(document).ready(function () {
-            comments_get("", now_post_id)
+            comments_get("", now_post_id, sorting_status_eng)
             bookmarked(now_post_id)
         })
     </script>
@@ -102,9 +102,9 @@
     <div class="comment_box_head fixed level">
         <div class="comments_count level-left">
             <p class="subtitle is-5">
-                <strong>0</strong>
+                <strong>{{ count_comments }}</strong>
             </p>
-            <small>&nbsp;comments</small>
+            <small style="margin-bottom: 1rem">&nbsp;comments</small>
         </div>
 
         <div class="dropdown is-right is-hoverable level-right">
@@ -164,6 +164,12 @@
         </div>
     </div>
 </section>
-
+    <div class = 'ad-banner'>
+        <ins class="kakao_ad_area" style="display:none;"
+         data-ad-unit = "DAN-Iw0hzEbLSnNtE7TJ"
+         data-ad-width = "320"
+         data-ad-height = "50"></ins>
+        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
 </body>
 </html>

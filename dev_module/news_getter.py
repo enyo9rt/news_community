@@ -12,7 +12,7 @@ def get_news():
     '''
     try:
         news_box = list(db.news_data.find({}, {'_id': False}).limit(20).sort([("post_id", -1)]))
-        # print(news_box)
+        # print(news_box[0]['view'])
         return news_box
 
     except:
