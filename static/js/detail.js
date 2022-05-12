@@ -23,6 +23,7 @@ function set_sorting_method(sorting_item) {
 // 댓글 작성 함수 -hj
 function post_comment() {
     const date = new Date().toISOString()
+    const comment_value = $('#comment').val()
     $.ajax({
         type: "POST",
         url: "/comment",
@@ -33,24 +34,33 @@ function post_comment() {
         },
         success: function (response) {
             alert(response['msg'])
+            window.location.reload()
             $('#comment').val('')
             comments_get("",now_post_id)
         }
     })
 }
 
+function delete_confirm(comment_idx) {
+    if (confirm('정말로 삭제하시겠습니까?')) {
+        delete_comment(comment_idx)
+    } else {
+        return false
+    }
+}
+
 function delete_comment(comment_idx) {
-    console.log(comment_idx)
     $.ajax({
         type: "POST",
         url: "/comment/delete",
         data: {
             comment_idx_give: comment_idx,
-            // comment_user_id_give: user_id
         },
         success: function (response) {
-            alert(response['msg'])
-            window.location.reload()
+            if(response['success'] == '성공') {
+                alert('삭제되었습니다.')
+                window.location.reload()
+            }
         }
     })
 }
@@ -93,8 +103,7 @@ function comments_get(user_id, post_id, sorting_status_eng) {
     // console.log(user_id, post_id)
     if (user_id == undefined) {
         user_id = ""
-    }
-    else if (post_id == undefined) {
+    } else if (post_id == undefined) {
         post_id = ""
     }
     $("#comment-box").empty()
@@ -123,7 +132,7 @@ function comments_get(user_id, post_id, sorting_status_eng) {
                                             <div class="media-content">
                                                 <div class="content">
                                                     <p>
-                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small><small onclick="delete_comment()" class="delete_word">삭제</small>
+                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small><small onclick="delete_confirm(${comment['idx']})" class="delete_word">삭제</small>
                                                         <br>
                                                         ${comment['comment']}
                                                     </p>

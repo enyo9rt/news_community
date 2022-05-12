@@ -40,7 +40,7 @@ class DetailControl():
             max_value = 1
         else:
             max_value = DetailContents.plus_comment_id()
-        print('save run')
+
         doc = {
             "comment": xss_protect.stop_code_filter(comment_receive),
             "user_id": user_info['user_id'],
@@ -60,9 +60,8 @@ class DetailControl():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = UserAdmin.users_find_one("user_id", payload["id"])  # 유저 회원 정보 데이터 불러오기
 
-        comment_writer_info = AboutComment.comment_find('idx', int(comment_idx_receive))  # user_id로 코멘트 데이터 불러오기
-        print(comment_writer_info)
-        if comment_writer_info['user_id'] == user_info['user_id']:
+        comment = AboutComment.comment_find('idx', int(comment_idx_receive))  # user_id로 코멘트 데이터 불러오기
+        if comment['user_id'] == user_info['user_id']:
             DetailContents.delete_comment(comment_idx_receive)
             return jsonify({'msg': '의견이 삭제 되었습니다.', 'success': "성공"})
 
