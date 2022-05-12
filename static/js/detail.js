@@ -20,10 +20,15 @@ function set_sorting_method(sorting_item) {
     comments_get("", now_post_id, sorting_status_eng)
 }
 
+String.replaceAll = function(search, replacement) {
+    return this.split(search).join(replacement);
+};
+
 // 댓글 작성 함수 -hj
 function post_comment() {
     const date = new Date().toISOString()
-    const comment_value = $('#comment').val()
+    var comment_value = document.querySelector('textarea').value;
+    comment_value = comment_value.replaceAll(/(\r|\n|\r\n)/g, "<br/>").replaceAll(/ /g, "&nbsp;");
     $.ajax({
         type: "POST",
         url: "/comment",
@@ -131,11 +136,15 @@ function comments_get(user_id, post_id, sorting_status_eng) {
                                             </div>
                                             <div class="media-content">
                                                 <div class="content">
-                                                    <p>
-                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small><small onclick="delete_confirm(${comment['idx']})" class="delete_word">삭제</small>
-                                                        <br>
-                                                        ${comment['comment']}
-                                                    </p>
+                                                    <div class="level">
+                                                        <p class="level-left">
+                                                        <strong style="font-weight: bold">${comment['nick_name']}</strong> 
+                                                        &nbsp;<small style="font-size: 0.9rem">@${comment['user_id']}</small> 
+                                                        &nbsp;&nbsp;<small style="font-size: 0.9rem">${time}</small>
+                                                        </p>
+                                                        <small onclick="delete_comment(${comment['idx']})" class="delete_word level-right">삭제</small>
+                                                    </div>
+                                                    <div class="comment">${comment['comment']}</div>
                                                 </div>
                                                 <nav class="level is-mobile">
                                                     <div class="level-left">
@@ -158,13 +167,16 @@ function comments_get(user_id, post_id, sorting_status_eng) {
                                                          alt="Image">
                                                 </a>
                                             </div>
-                                            <div class="media-content">
+                                           <div class="media-content">
                                                 <div class="content">
-                                                    <p>
-                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small>
-                                                        <br>
-                                                        ${comment['comment']}
-                                                    </p>
+                                                    <div class="level">
+                                                        <p class="level-left">
+                                                        <strong style="font-weight: bold">${comment['nick_name']}</strong> 
+                                                        &nbsp;<small style="font-size: 0.9rem">@${comment['user_id']}</small> 
+                                                        &nbsp;&nbsp;<small style="font-size: 0.9rem">${time}</small>
+                                                        </p>
+                                                    </div>
+                                                    <div class="comment">${comment['comment']}</div>
                                                 </div>
                                                 <nav class="level is-mobile">
                                                     <div class="level-left">
@@ -178,8 +190,6 @@ function comments_get(user_id, post_id, sorting_status_eng) {
                                             </div>
                                         </article>                                     
                                     </div>`
-                    }
-                    
                     $("#comment-box").append(temp_html)
                 }
             }

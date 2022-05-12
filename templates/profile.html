@@ -51,7 +51,7 @@
     </script>
 </head>
 <body class="has-navbar-fixed-top">
-<nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="/">
                 <small class="navbar_team">TEAM.</small>
@@ -72,7 +72,6 @@
 <section class="hero is-white">
     <div class="hero-body" style="padding-bottom:1rem;margin:auto;min-width: 400px">
         <article class="media">
-
             <figure class="media-left" style="align-self: center">
                 <a class="image is-96x96" href="#">
                     <img class="is-rounded" src="{{ url_for('static', filename=user_info.profile_pic_real) }}">
@@ -81,7 +80,7 @@
             <div class="media-content">
                 <div class="content">
                     <p>
-                        <strong>{{ user_info.nick_name }}</strong> <small> 님의 프로필 </small>
+                        <strong style="font-weight: bold; font-size: large;">{{ user_info.nick_name }}</strong> <small style="font-size: small;"> 님의 프로필 </small>
                         <br>
                         {% if user_info.profile_info %}
                             {{ user_info.profile_info }}
@@ -166,8 +165,9 @@
         {% endif %}
     </div>
 </section>
+<div style="background-color: white; width: 100%; height: 4rem"></div>
 <div id="tabs" class="tabs is-centered is-boxed is-medium">
-    <ul>
+    <ul style="background-color: white">
         <li id="comments" class="is-active">
             <a onclick="toggle_tab('comments')">
                 <span class="icon is-small"><i class="fa-solid fa-comment-dots"></i></span>
@@ -182,78 +182,16 @@
         </li>
     </ul>
 </div>
- <div id="comment-box" class="container fixed">
-        <div class="box">
-            <article class="media">
-                <div class="media-left">
-                    <a class="image is-64x64" href="#">
-                        <img class="is-rounded"
-                             src={{ url_for("static", filename="profile_pics/profile_placeholder.png") }} alt="Image">
-                    </a>
-                </div>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>홍길동</strong> <small>@username</small> <small>10분 전</small>
-                            <br>
-                            글을 적는 칸
-                        </p>
-                    </div>
-                    <nav class="level is-mobile">
-                        <div class="level-left">
-                            <a class="level-item is-sparta" aria-label="heart"
-                               onclick="toggle_like('', 'heart')">
-                                        <span class="icon is-small"><i class="fa fa-heart"
-                                                                       aria-hidden="true"></i></span>&nbsp;<span
-                                    class="like-num">2.7k</span>
-                            </a>
-                        </div>
 
-                    </nav>
-                </div>
-            </article>
-        </div>
+<div id="comment-box" class="container fixed">
+</div>
 
-    </div>
-    <div class = 'ad-banner'>
-        <ins class="kakao_ad_area" style="display:none;"
-         data-ad-unit = "DAN-Iw0hzEbLSnNtE7TJ"
-         data-ad-width = "320"
-         data-ad-height = "50"></ins>
-        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-    </div>
-    <script>
-        // Select the input element using
-        // document.querySelector
-        var input = document.querySelector(
-          "#file-with-js>.file-label>.file-input"
-        );
-
-        // Bind an listener to onChange event of the input
-        input.onchange = function () {
-            if(input.files.length > 0){
-                var fileNameContainer =
-                    document.querySelector(
-                      "#file-with-js>.file-label>.file-name"
-                    );
-                // set the inner text of fileNameContainer
-                // to the name of the file
-                fileNameContainer.textContent =
-                  input.files[0].name;
-            }
-        }
-
-        // 이미지 삭제 후 파일 이름 기본 이미지 처리
-        const to_default_img = () => {
-                document.getElementById("input-pic").value=null;
-                var fileNameContainer =
-                document.querySelector(
-                  "#file-with-js>.file-label>.file-name"
-                );
-                // set the inner text of fileNameContainer
-                // to the name of the file
-                fileNameContainer.textContent = '기본 이미지'
-        }
-    </script>
+<div class="ad-banner">
+    <ins class="kakao_ad_area" style="display:none;"
+     data-ad-unit = "DAN-Iw0hzEbLSnNtE7TJ"
+     data-ad-width = "320"
+     data-ad-height = "50"></ins>
+    <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+</div>
 </body>
 </html>
