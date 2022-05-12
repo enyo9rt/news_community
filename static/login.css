@@ -37,3 +37,15 @@ button {
     text-align: left;
     padding-left: 2px;
 }
+
+#undertext_id {
+    color: black
+}
+
+#undertext_pw {
+    color: black
+}
+
+#undertext_pw2 {
+    color: black
+}
