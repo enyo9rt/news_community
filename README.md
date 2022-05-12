@@ -1,6 +1,7 @@
+<br>
 <div align="center">
-  <h2 align="center">News_community</h2>
-  <h4 align="center">by Team Harmony</h4>
+  <h2>News_community</h2>
+  <h4>by Team Harmony</h4>
   <p>Summer Project in 2022</p>
 </div>
 
