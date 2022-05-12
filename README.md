@@ -1,4 +1,3 @@
-<br />
 <div align="center">
 
   <p>
@@ -22,11 +21,11 @@
 ### 🏠 About project
 This News community developed by Team Harmony provides a summary of Naver sports news using CLOVA Summary, a text summarization API.</br>
 You can read summarised sports news on a daily basis. And you can express your thoughts freely on each article that you are interested.
-
-
+<br/>
+<br/>
 ### ⏲  Project duration
 <p>2022. 05. 06 - 2022 05. 12</p>
-
+<br/>
 
 ### 🧙 Crew
 - :lipstick: Front-end
@@ -39,17 +38,18 @@ You can read summarised sports news on a daily basis. And you can express your t
   - Hyun-jun Moon
 - 🏠 Architect
   - Chanhyeok choi
-
+<br/>
+<br/>
 
 ### 📌 Main Features
-#### Login/Register - 
+#### [Login/Register] 
 - Sign up
 - JWT based login
 - Validation function
 - Protection from XSS Attack
 - Protection from CSRF Attack
 
-#### Profile Admin -
+#### [Profile Admin]
 - Uploading profile img  
 - Modification of nickname, profile img and introduction message.
 - Collection of bookmarked news
@@ -57,7 +57,7 @@ You can read summarised sports news on a daily basis. And you can express your t
 - Protection from XSS Attack
 - Protection from CSRF Attack
 
-#### Detail -
+#### [Detail] 
 - Providing a summarized news
 - Leaving a comment
 - Deleting comments
