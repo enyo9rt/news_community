@@ -110,7 +110,9 @@ function comments_get(user_id, post_id, sorting_status_eng) {
                     let time = time2str(new Date(comment["date"]))
                     let count = num2str(comment["count_like"])
                     let icon = comment['like_by_me'] ? "fa-heart" : "fa-heart-o"
-                    let temp_html = `<div class="box" id="${comment["_id"]}">
+                    let temp_html = ''
+                    if (comment['mine'] == true) {
+                        temp_html = `<div class="box" id="${comment["_id"]}">
                                         <article class="media">
                                             <div class="media-left">
                                                 <a class="image is-64x64" href="/profile/${comment['user_id']}">
@@ -138,6 +140,37 @@ function comments_get(user_id, post_id, sorting_status_eng) {
                                             </div>
                                         </article>                                     
                                     </div>`
+                    } else {
+                         temp_html = `<div class="box" id="${comment["_id"]}">
+                                        <article class="media">
+                                            <div class="media-left">
+                                                <a class="image is-64x64" href="/profile/${comment['user_id']}">
+                                                    <img class="is-rounded" src="/static/${comment['profile_pic_real']}"
+                                                         alt="Image">
+                                                </a>
+                                            </div>
+                                            <div class="media-content">
+                                                <div class="content">
+                                                    <p>
+                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small>
+                                                        <br>
+                                                        ${comment['comment']}
+                                                    </p>
+                                                </div>
+                                                <nav class="level is-mobile">
+                                                    <div class="level-left">
+                                                        <a class="level-item like_icon" aria-label="like" onclick="toggle_like('${comment['_id']}')">
+                                                            <span class="icon is-small"><i class="fa ${icon}"
+                                                                                           aria-hidden="true"></i></span>&nbsp;<span class="like-num">${count}</span>
+                                                        </a>
+                                                    </div>
+
+                                                </nav>
+                                            </div>
+                                        </article>                                     
+                                    </div>`
+                    }
+                    
                     $("#comment-box").append(temp_html)
                 }
             }
