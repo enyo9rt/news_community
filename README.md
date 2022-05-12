@@ -7,10 +7,10 @@
 <p align='center'>
     <img src="https://img.shields.io/badge/Python-3.8-007396?style=flat-square&logo=python&logoColor=blue"/>
     <img src="https://img.shields.io/badge/Javascript--007396?style=flat-square&logo=javascript&logoColor=yellow"/>
-    <img src='https://img.shields.io/badge/jquery-1.4.1-007396?style=flat-square&logo=jquery&logoColor=pink"'/>
-    <img src='https://img.shields.io/badge/ajax-purple?logo="ajax"'/>
-    <img src='https://img.shields.io/badge/aws-00E7C3?logo="aws"'/>
-    <img src='https://img.shields.io/badge/GitHub Actions-purple?logo="GitHub Actions"'/>
+    <img src="https://img.shields.io/badge/jquery-1.4.1-007396?style=flat-square&logo=jquery&logoColor=pink"/>
+    <img src="https://img.shields.io/badge/ajax-purple?logo="ajax"/>
+    <img src="https://img.shields.io/badge/aws-00E7C3?logo="aws"/>
+    <img src="https://img.shields.io/badge/GitHub Actions-purple?logo="GitHub Actions"/>
 </p>
 
 <p align='center'>
