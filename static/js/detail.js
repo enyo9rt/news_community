@@ -50,8 +50,10 @@ function delete_comment(comment_idx) {
             // comment_user_id_give: user_id
         },
         success: function (response) {
-            alert(response['msg'])
-            window.location.reload()
+            if(response['success'] == '성공') {
+                alert('삭제 하시겠습니까?')
+                window.location.reload();
+            }
         }
     })
 }
