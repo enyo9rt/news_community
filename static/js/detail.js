@@ -46,7 +46,8 @@ function delete_comment(comment_idx) {
         type: "POST",
         url: "/comment/delete",
         data: {
-            comment_idx_give: comment_idx
+            comment_idx_give: comment_idx,
+            // comment_user_id_give: user_id
         },
         success: function (response) {
             alert(response['msg'])

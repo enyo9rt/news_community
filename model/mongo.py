@@ -91,3 +91,9 @@ class Posts():
         news_db = client.news_data
         view = news_db.news_data.find_one({'post_id': post_id})['view']
         return view
+
+
+class AboutComment:
+    @staticmethod
+    def comment_find(key, value):
+        return db.comments.find_one({key: value})

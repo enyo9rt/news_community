@@ -1,7 +1,7 @@
 from flask import render_template, request, jsonify, redirect, url_for
 from datetime import datetime
 from CONFIG.account import SECRET_KEY
-from model.mongo import UserAdmin, DetailContents, Posts
+from model.mongo import UserAdmin, DetailContents, Posts, AboutComment
 from operator import itemgetter
 import jwt
 
@@ -56,8 +56,18 @@ class DetailControl():
 
     @staticmethod
     def delete_comment(comment_idx_receive):
-        DetailContents.delete_comment(comment_idx_receive)
-        return jsonify({'msg': '의견이 삭제 되었습니다.'})
+        token_receive = request.cookies.get('mytoken')
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = UserAdmin.users_find_one("user_id", payload["id"])  # 유저 회원 정보 데이터 불러오기
+
+        comment_writer_info = AboutComment.comment_find('idx', int(comment_idx_receive))  # user_id로 코멘트 데이터 불러오기
+        print(comment_writer_info)
+        if comment_writer_info['user_id'] == user_info['user_id']:
+            DetailContents.delete_comment(comment_idx_receive)
+            return jsonify({'msg': '의견이 삭제 되었습니다.', 'success': "성공"})
+
+        else:
+            return jsonify({'msg': '남의 댓글에 손대지 마세요.', 'failure': "실패"})
 
     @staticmethod
     def like_update(comment_id_receive, action_receive):
