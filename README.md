@@ -22,11 +22,11 @@ Summer Project in 2022
  We're a group of hackers with experts in a variety of fields. We post a summary of Naver sports news using ai.</br>
  Users can express their thoughts freely on our site.</br>
 
-### ⏲️ 개발기간
-2022년 05. 06 - 2022 05. 12</br>
+### ⏲️
+2022. 05. 06 - 2022 05. 12</br>
 
 
-### 🧙 맴버구성
+### 🧙 crew
 - :lipstick: Frontend
   - Yejin kim
 - :computer: Backend
