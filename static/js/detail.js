@@ -100,6 +100,7 @@ function num2str(count) {
 
 // 댓글 리스팅
 function comments_get(user_id, post_id, sorting_status_eng) {
+    // console.log(user_id, post_id)
     if (user_id == undefined) {
         user_id = ""
     } else if (post_id == undefined) {
@@ -131,7 +132,7 @@ function comments_get(user_id, post_id, sorting_status_eng) {
                                             <div class="media-content">
                                                 <div class="content">
                                                     <p>
-                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small><small onclick="delete_confirm(${comment['idx']})" class="delete_word">삭제</small>
+                                                        <strong>${comment['nick_name']}</strong> <small>@${comment['user_id']}</small> <small>${time}</small><small onclick="delete_comment(${comment['idx']})" class="delete_word">삭제</small>
                                                         <br>
                                                         ${comment['comment']}
                                                     </p>
