@@ -13,9 +13,6 @@
     <!-- link 모음 -->
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <!-- BootStrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Googole Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,10 +30,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <!-- Font Awesome CSS -->
     <script src="https://kit.fontawesome.com/f6788aacd4.js" crossorigin="anonymous"></script>
-    <!-- BootStrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
 
     <script src="../static/js/profile_about.js"></script>
     <script src="../static/js/detail.js"></script>
@@ -120,10 +113,14 @@
                                                     <span class="file-label">파일 선택</span>
                                                 </span>
                                                 <span id="file-name" class="file-name"
-                                                      style="width:100%;max-width:100%">{{ user_info.profile_pic }}</span>
+                                                      style="width:100%;max-width:100%">{% if user_info.profile_pic=="profile_placeholder.png" %}
+                                                                    기본 이미지
+                                                                  {% else %}
+                                                                    {{ user_info.profile_pic }}
+                                                                  {% endif %}</span>
                                             </label>
                                             <p class="control">
-                                                <button class="button" onclick="to_defailt_img()">
+                                                <button class="button" onclick="to_default_img()">
                                                   <span>삭제</span>
                                                 </button>
                                             </p>
@@ -236,14 +233,16 @@
             }
         }
 
-        const to_defailt_img = () => {
+        // 이미지 삭제 후 파일 이름 기본 이미지 처리
+        const to_default_img = () => {
+                document.getElementById("input-pic").value=null;
                 var fileNameContainer =
-                    document.querySelector(
-                      "#file-with-js>.file-label>.file-name"
-                    );
+                document.querySelector(
+                  "#file-with-js>.file-label>.file-name"
+                );
                 // set the inner text of fileNameContainer
                 // to the name of the file
-                fileNameContainer.textContent = ''
+                fileNameContainer.textContent = '기본 이미지'
         }
     </script>
 </body>
