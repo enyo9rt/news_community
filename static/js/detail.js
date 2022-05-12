@@ -190,8 +190,8 @@ function comments_get(user_id, post_id, sorting_status_eng) {
                                             </div>
                                         </article>                                     
                                     </div>`
-                        $("#comment-box").append(temp_html)
                     }
+                    $("#comment-box").append(temp_html)
                 }
             }
         }
