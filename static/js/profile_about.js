@@ -5,38 +5,6 @@ function sign_out() {
     window.location.href = "/"
 }
 
-// Select the input element using
-// document.querySelector
-var input = document.querySelector(
-  "#file-with-js>.file-label>.file-input"
-);
-
-// Bind an listener to onChange event of the input
-input.onchange = function () {
-    if(input.files.length > 0){
-        var fileNameContainer =
-            document.querySelector(
-              "#file-with-js>.file-label>.file-name"
-            );
-        // set the inner text of fileNameContainer
-        // to the name of the file
-        fileNameContainer.textContent =
-          input.files[0].name;
-    }
-}
-
-// 이미지 삭제 후 파일 이름 기본 이미지 처리
-const to_default_img = () => {
-        document.getElementById("input-pic").value=null;
-        var fileNameContainer =
-        document.querySelector(
-          "#file-with-js>.file-label>.file-name"
-        );
-        // set the inner text of fileNameContainer
-        // to the name of the file
-        fileNameContainer.textContent = '기본 이미지'
-}
-
 function update_profile() {
     let name = $('#input-name').val()
     let file = $('#input-pic')[0].files[0]
