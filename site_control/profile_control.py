@@ -27,7 +27,7 @@ class ProfileHandler:
             name_receive = request.form["name_give"]
             about_receive = request.form["about_give"]
             new_doc = {
-                "profile_name": xss_protect.stop_code_filter(name_receive),
+                "nick_name": xss_protect.stop_code_filter(name_receive),
                 "profile_info": xss_protect.stop_code_filter(about_receive)
             }
             if 'file_give' in request.files:
