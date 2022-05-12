@@ -66,7 +66,5 @@ You can read summarised sports news on a daily basis. And you can express your t
 - Sorting comments by date(ASC, DESC) and liked number
 
 
-etc ..
-
 
 
