@@ -142,7 +142,7 @@ function comments_get(user_id, post_id, sorting_status_eng) {
                                                         &nbsp;<small style="font-size: 0.9rem">@${comment['user_id']}</small> 
                                                         &nbsp;&nbsp;<small style="font-size: 0.9rem">${time}</small>
                                                         </p>
-                                                        <small onclick="delete_comment(${comment['idx']})" class="delete_word level-right">삭제</small>
+                                                        <small onclick="delete_confirm(${comment['idx']})" class="delete_word level-right">삭제</small>
                                                     </div>
                                                     <div class="comment">${comment['comment']}</div>
                                                 </div>

@@ -73,7 +73,7 @@ function posts_get(user_id) {
         success: function (response) {
             console.log(response["msg"])
             if (response["result"] == "success") {
-                let posts = response["posts"]
+                let posts = response["posts"].reverse()
                 for (let i = 0; i < posts.length; i++) {
                         let post = posts[i]
                         let temp_html = `<div class="bookmark_post box" id="${post["post_id"]}">
