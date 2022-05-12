@@ -2,6 +2,10 @@ body {
     font-family: 'Nanum Gothic', sans-serif;
 }
 
+.navbar_icon {
+    margin-top: 1px;
+}
+
 .section {
     padding: 1rem 1.5rem;
     max-width: 750px;
@@ -67,4 +71,8 @@ input::-webkit-calendar-picker-indicator {
 
 #tabs > ul > .is-active > a > span {
     color: #2f363b;
+}
+
+.ad-banner {
+    bottom: -3px;
 }
