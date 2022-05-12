@@ -1,18 +1,19 @@
 <br />
 <div align="center">
-  <h2>News_community</h2>
-  <h4>by Team Harmony</h4>
-  <p>Summer Project in 2022</p>
 
   <p>
       <img src="https://img.shields.io/badge/Python-3.8-007396?style=flat-square&logo=python&logoColor=blue"/>
-      <img src="https://img.shields.io/badge/Javascript--007396?style=flat-square&logo=javascript&logoColor=yellow"/>
+      <img src="https://img.shields.io/badge/Javascript-grey?style=flat-square&logo=javascript&logoColor=yellow"/>
       <img src="https://img.shields.io/badge/jquery-1.4.1-007396?style=flat-square&logo=jquery&logoColor=pink"/>
-      <img src="https://img.shields.io/badge/ajax-purple?logo="ajax"/>
-      <img src="https://img.shields.io/badge/aws-00E7C3?logo=aws"/>
-      <img src="https://img.shields.io/badge/GitHub Actions-purple?logo="GitHub Actions"/>
-  </p>
-  
+      <img src="https://img.shields.io/badge/ajax-grey?style=flat-square&logo="ajax"/>
+      <img src="https://img.shields.io/badge/aws-grey?style=flat-square&logo=Amazon AWS"/>
+      <img src="https://img.shields.io/badge/GitHub Actions-grey?style=flat-square&logo=GitHub Actions"/>
+      <img src="https://img.shields.io/badge/Bulma-grey?style=flat-square&logo=bulma"/>
+</p>
+<h2>News_community</h2>
+<h4>by Team Harmony</h4>
+<p>Summer Project in 2022</p>
+
   <p>
     <img src="https://user-images.githubusercontent.com/68278903/167773592-0153f6d8-f187-4fbf-b747-088b864d2785.jpg" width="300px" />
   </p>
