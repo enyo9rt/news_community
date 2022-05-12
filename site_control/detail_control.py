@@ -40,7 +40,7 @@ class DetailControl():
             max_value = 1
         else:
             max_value = DetailContents.plus_comment_id()
-        print('save run')
+
         doc = {
             "comment": xss_protect.stop_code_filter(comment_receive),
             "user_id": user_info['user_id'],
