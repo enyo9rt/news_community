@@ -19,6 +19,7 @@ def save_comment():
 @detail_page.route('/comment/delete', methods=['POST'])
 def delete_comment():
     comment_idx_receive = request.form['comment_idx_give']
+    # comment_user_id_receive = request.form['comment_user_id_give']
     return DetailControl.delete_comment(comment_idx_receive)
 
 @detail_page.route('/like_update', methods=['POST'])
