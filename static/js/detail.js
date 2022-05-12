@@ -159,7 +159,7 @@ function comments_get(user_id, post_id, sorting_status_eng) {
                                         </article>                                     
                                     </div>`
                     } else {
-                         temp_html = `<div class="box" id="${comment["_id"]}">
+                        temp_html = `<div class="box" id="${comment["_id"]}">
                                         <article class="media">
                                             <div class="media-left">
                                                 <a class="image is-64x64" href="/profile/${comment['user_id']}">
@@ -190,7 +190,8 @@ function comments_get(user_id, post_id, sorting_status_eng) {
                                             </div>
                                         </article>                                     
                                     </div>`
-                    $("#comment-box").append(temp_html)
+                        $("#comment-box").append(temp_html)
+                    }
                 }
             }
         }
