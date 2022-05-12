@@ -2,6 +2,7 @@ from flask import render_template, request, jsonify, redirect, url_for
 from model.mongo import UserAdmin
 from werkzeug.utils import secure_filename
 from model.mongo import DetailContents
+from dev_module.xss_protect import xss_protect
 import jwt
 
 SECRET_KEY = 'test'
@@ -26,8 +27,8 @@ class ProfileHandler:
             name_receive = request.form["name_give"]
             about_receive = request.form["about_give"]
             new_doc = {
-                "profile_name": name_receive,
-                "profile_info": about_receive
+                "profile_name": xss_protect.stop_code_filter(name_receive),
+                "profile_info": xss_protect.stop_code_filter(about_receive)
             }
             if 'file_give' in request.files:
                 file = request.files["file_give"]
