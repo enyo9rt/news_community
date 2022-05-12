@@ -1,7 +1,7 @@
 from html_sanitizer import Sanitizer
 
 
-class xxs_protect():
+class xss_protect():
     @staticmethod
     def stop_code_filter(target):
         sanitizer = Sanitizer()

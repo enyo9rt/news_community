@@ -4,7 +4,7 @@ from CONFIG.account import SECRET_KEY
 from model.mongo import UserAdmin, DetailContents, Posts
 from operator import itemgetter
 import jwt
-from dev_module import xss_protect
+from dev_module.xss_protect import xss_protect
 
 class DetailControl():
     @staticmethod
@@ -40,9 +40,9 @@ class DetailControl():
             max_value = 1
         else:
             max_value = DetailContents.plus_comment_id()
-
+        print('save run')
         doc = {
-            "comment": xss_protect.xxs_protect(comment_receive),
+            "comment": xss_protect.stop_code_filter(comment_receive),
             "user_id": user_info['user_id'],
             "nick_name": user_info['nick_name'],
             "date": date_receive,
