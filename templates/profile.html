@@ -78,7 +78,7 @@
             <div class="media-content">
                 <div class="content">
                     <p>
-                        <strong>{{ user_info.nick_name }}</strong> <small> @{{ user_info.user_id }} </small>
+                        <strong>{{ user_info.nick_name }}</strong> <small> 님의 프로필 </small>
                         <br>
                         {% if user_info.profile_info %}
                             {{ user_info.profile_info }}
@@ -112,7 +112,7 @@
                                 <div class="field">
                                     <label class="label" for="input-pic">프로필 사진</label>
                                     <div class="control is-expanded">
-                                        <div class="file has-name field has-addons">
+                                        <div class="file has-name field has-addons" id = 'file-with-js'>
                                             <label class="file-label control" style="width:100%">
                                                 <input id="input-pic" class="file-input" type="file" name="resume">
                                                 <span class="file-cta"><span class="file-icon"><i
@@ -123,7 +123,7 @@
                                                       style="width:100%;max-width:100%">{{ user_info.profile_pic }}</span>
                                             </label>
                                             <p class="control">
-                                                <button class="button">
+                                                <button class="button" onclick="to_defailt_img()">
                                                   <span>삭제</span>
                                                 </button>
                                             </p>
@@ -208,5 +208,43 @@
         </div>
 
     </div>
+    <div class = 'ad-banner'>
+        <ins class="kakao_ad_area" style="display:none;"
+         data-ad-unit = "DAN-Iw0hzEbLSnNtE7TJ"
+         data-ad-width = "320"
+         data-ad-height = "50"></ins>
+        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
+    <script>
+        // Select the input element using
+        // document.querySelector
+        var input = document.querySelector(
+          "#file-with-js>.file-label>.file-input"
+        );
+
+        // Bind an listener to onChange event of the input
+        input.onchange = function () {
+            if(input.files.length > 0){
+                var fileNameContainer =
+                    document.querySelector(
+                      "#file-with-js>.file-label>.file-name"
+                    );
+                // set the inner text of fileNameContainer
+                // to the name of the file
+                fileNameContainer.textContent =
+                  input.files[0].name;
+            }
+        }
+
+        const to_defailt_img = () => {
+                var fileNameContainer =
+                    document.querySelector(
+                      "#file-with-js>.file-label>.file-name"
+                    );
+                // set the inner text of fileNameContainer
+                // to the name of the file
+                fileNameContainer.textContent = ''
+        }
+    </script>
 </body>
 </html>

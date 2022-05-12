@@ -37,6 +37,12 @@ class ProfileHandler:
                 file.save("./static/" + file_path)
                 new_doc["profile_pic"] = filename
                 new_doc["profile_pic_real"] = file_path
+            else:
+                filename = 'profile_placeholder.png'
+                file_path = 'profile_pics/profile_placeholder.png'
+                new_doc["profile_pic"] = filename
+                new_doc["profile_pic_real"] = file_path
+
             UserAdmin.users_update_one(payload['id'], new_doc)
             return jsonify({"result": "success", 'msg': '프로필을 업데이트했습니다.'})
         except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):

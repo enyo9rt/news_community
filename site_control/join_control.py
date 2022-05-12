@@ -8,7 +8,7 @@ import jwt
 class JoinAdmin():
     @staticmethod
     def sign_in(user_id, pw_hash):
-        is_customer = UserAdmin.is_custmoer_check(user_id, pw_hash)
+        is_customer = UserAdmin.is_customer_check(user_id, pw_hash)
 
         if is_customer is not None:
             payload = {
