@@ -113,10 +113,14 @@
                                                     <span class="file-label">파일 선택</span>
                                                 </span>
                                                 <span id="file-name" class="file-name"
-                                                      style="width:100%;max-width:100%">{{ user_info.profile_pic }}</span>
+                                                      style="width:100%;max-width:100%">{% if user_info.profile_pic=="profile_placeholder.png" %}
+                                                                    기본 이미지
+                                                                  {% else %}
+                                                                    {{ user_info.profile_pic }}
+                                                                  {% endif %}</span>
                                             </label>
                                             <p class="control">
-                                                <button class="button" onclick="to_defailt_img()">
+                                                <button class="button" onclick="to_default_img()">
                                                   <span>삭제</span>
                                                 </button>
                                             </p>
@@ -229,14 +233,16 @@
             }
         }
 
-        const to_defailt_img = () => {
+        // 이미지 삭제 후 파일 이름 기본 이미지 처리
+        const to_default_img = () => {
+                document.getElementById("input-pic").value=null;
                 var fileNameContainer =
-                    document.querySelector(
-                      "#file-with-js>.file-label>.file-name"
-                    );
+                document.querySelector(
+                  "#file-with-js>.file-label>.file-name"
+                );
                 // set the inner text of fileNameContainer
                 // to the name of the file
-                fileNameContainer.textContent = ''
+                fileNameContainer.textContent = '기본 이미지'
         }
     </script>
 </body>
