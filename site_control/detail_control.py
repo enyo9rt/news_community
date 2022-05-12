@@ -66,9 +66,6 @@ class DetailControl():
             DetailContents.delete_comment(comment_idx_receive)
             return jsonify({'msg': '의견이 삭제 되었습니다.', 'success': "성공"})
 
-        else:
-            return jsonify({'msg': '남의 댓글에 손대지 마세요.', 'failure': "실패"})
-
     @staticmethod
     def like_update(comment_id_receive, action_receive):
         """ -yj
@@ -136,6 +133,8 @@ class DetailControl():
                 # 좋아요 갯수, 여부 확인
                 comment["count_like"] = DetailContents.count_like(comment["_id"])
                 comment["like_by_me"] = bool(DetailContents.like_by_me("like_comment_id", comment["_id"], user_info))
+                # 내가 쓴 댓글인지 확인
+                comment["mine"] = (comment['user_id'] == user_info)
 
             # 정렬
             if sorting_status_receive == "new":
