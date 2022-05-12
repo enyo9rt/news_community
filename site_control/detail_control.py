@@ -27,7 +27,7 @@ class DetailControl():
             return render_template('detail.html', post=post, status=status, user_info=user_info, count_comments=count_comments)
         except :
             status = False
-            return render_template('index.html', msg="로그인을 해주세요!")
+            return redirect(url_for("main.home", msg="로그인을 해주세요!"))
 
     @staticmethod
     def save_comment(comment_receive, date_receive, id_receive):
