@@ -1,10 +1,14 @@
 from site_view import main_site, join_site, detail_site, profile_site
+from flask_wtf.csrf import CSRFProtect
 from flask import Flask
 from dev_module import weather
 
 
 
 application = Flask(__name__)
+CSRFProtect(application)
+application.config["SECRET_KEY"] = 'chlcksgur12'
+
 application.register_blueprint(main_site.main_page)
 application.register_blueprint(join_site.join_page)
 application.register_blueprint(detail_site.detail_page)
