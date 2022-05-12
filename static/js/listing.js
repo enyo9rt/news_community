@@ -25,7 +25,7 @@ const listing = () => {
                                             <div class="card-body">
                                                 <a href="/detail/${post_id}"><h5 class="card-title">${title}</h5></a>
                                                 <p class="card-text">${contents}</p>
-                                                <p class="mycomment">조회수: ${view}</p>
+                                                <p class="view">조회수: ${view}</p>
                                             </div>
                                         </div>
                                     </div>`;

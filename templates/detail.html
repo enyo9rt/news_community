@@ -50,7 +50,7 @@
 </head>
 
 <body class="has-navbar-fixed-top">
-<nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
             <small class="navbar_team">TEAM.</small>
@@ -70,7 +70,7 @@
 </nav>
 
 <div class="news_wrap box fixed">
-    <div class="news_title title is-5"><strong><h4>{{ post.title }}</h4></strong></div>
+    <div class="news_title title"><h4>{{ post.title }}</h4></div>
     <div class="news_time level-left">
         <small>{{ post.write_time }}</small>
     </div>
@@ -143,38 +143,10 @@
     </div>
 
     <div id="comment-box" class="container fixed">
-        <div class="box">
-            <article class="media">
-                <div class="media-left">
-                    <a class="image is-64x64" href="#">
-                        <img class="is-rounded"
-                             src={{ url_for("static", filename="profile_pics/profile_placeholder.png") }} alt="Image">
-                    </a>
-                </div>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>홍길동</strong> <small>@username</small> <small>10분 전</small>
-                            <br>
-                            글을 적는 칸
-                        </p>
-                    </div>
-                    <nav class="level is-mobile">
-                        <div class="level-left">
-                            <a class="level-item is-sparta" aria-label="heart"
-                               onclick="toggle_like('', 'heart')">
-                                        <span class="icon is-small"><i class="fa fa-heart"
-                                                                       aria-hidden="true"></i></span>&nbsp;<span
-                                    class="like-num">2.7k</span>
-                            </a>
-                        </div>
-                    </nav>
-                </div>
-            </article>
-        </div>
     </div>
 </section>
-    <div class = 'ad-banner'>
+
+    <div class="ad-banner">
         <ins class="kakao_ad_area" style="display:none;"
          data-ad-unit = "DAN-Iw0hzEbLSnNtE7TJ"
          data-ad-width = "320"
