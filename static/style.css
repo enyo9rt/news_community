@@ -1,12 +1,10 @@
-* {
-  font-family: 'Do Hyeon', sans-serif;
-}
 h1 {
     font-size: 3.5rem;
 }
 
 body {
     background-color: RGBA(246, 255, 245);
+    font-family: 'Do Hyeon', sans-serif;
 }
 
 .comment{
@@ -26,17 +24,15 @@ body {
 }
 
 .navbar_icon {
-    margin-top: -9.5px;
+    margin-top: -11px;
 }
 
 .mytitle {
     width: 100%;
     height: 650px;
-
     background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.cashfeed.co.kr/attachments/d2befda8fc.jpg');
     background-position: center;
     background-size: cover;
-
     color: white;
 }
 
@@ -49,13 +45,10 @@ body {
 .title_content > button {
     width: 200px;
     height: 50px;
-
     background-color: transparent;
     color: white;
-
     border-radius: 50px;
     border: 3px solid white;
-
     margin-top: 10px;
 }
 
@@ -79,7 +72,6 @@ body {
     margin: 40px auto 3px auto;
     padding: 20px;
     box-shadow: 0px 0px 3px 0px gray;
-
     display: none;
 }
 
@@ -88,7 +80,6 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
     margin-top: 20px;
 }
 .subscription-btns > button {
@@ -101,10 +92,12 @@ body {
     justify-content: flex-end;
     padding: 20px;
 }
+
 .card-body > a:hover, a:visited, a:link, a:active
 {
     text-decoration: none; color: black;
 }
+
 .card-body > a:hover{
     color: #007afe;
 }
@@ -113,80 +106,36 @@ body {
     color: darkgray;
 }
 
-
-/*header{*/
-/*  width: 100%;*/
-/*  height: 60px;*/
-/*  background-color: #f8f9fa;*/
-/*  box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, .2);*/
-/*  position: fixed; !* 스크롤 처리가 안되도록 position: fixed설정해줌 *!*/
-/*  top: 0;*/
-/*  left: 0px;*/
-/*    z-index: 100;*/
-/*}*/
-
-/*.head-container{*/
-/*  width: 100%;*/
-/*  height: 100%;*/
-/*  display: flex; !* 안에거를 수평 정렬해야 해서 *!*/
-/*  justify-content: space-between;*/
-/*  align-items: center;*/
-/*    margin-left: 20px;*/
-/*}*/
-
 .inner {
   width: 100%;
   height: 100%;
-
   margin: 0 auto;
   padding: 0rem;
   overflow: hidden;
 }
 
-/*.head-container .head-brand a:hover {*/
-/*  color: #2186c4;*/
-/*  cursor: pointer; !* cursor 포인터로 한다는 뜻, *!*/
-/*}*/
-
-/*.head-container .head-brand {*/
-/*  font-weight: bold;*/
-/*  padding: 0.5rem;*/
-/*  background-color: #FFD432;*/
-/*  font-size: 1.2rem;*/
-/*}*/
-
-/*.head-container .head-blog {*/
-/*  font-weight: bold;*/
-/*  padding: 0.5rem;*/
-/*  background-color: #FFD432;*/
-/*  font-size: 1.2rem;*/
-/*}*/
-
-
 a {
   all: unset;
 }
-
 
 li a:hover {
   cursor: pointer;
 }
 
+/*a:link {*/
+/*  text-decoration: none;*/
+/*  color: #3f464d;*/
+/*}*/
 
-a:link {
-  text-decoration: none;
-  color: #3f464d;
-}
+/*a:visited {*/
+/*  text-decoration: none;*/
+/*  color: #3f464d;*/
+/*}*/
 
-a:visited {
-  text-decoration: none;
-  color: #3f464d;
-}
-
-a:active {
-  text-decoration: none;
-  color: #3f464d;
-}
+/*a:active {*/
+/*  text-decoration: none;*/
+/*  color: #3f464d;*/
+/*}*/
 
 a:hover {
   text-decoration: none;
@@ -195,21 +144,3 @@ a:hover {
 .card-image-box{
     height: 45%;
 }
-
-
-/*.head-container .head-brand a:hover {*/
-/*  color: #2186c4;*/
-/*  cursor: pointer; !* cursor 포인터로 한다는 뜻, *!*/
-/*}*/
-
-/*.head-container .head-brand {*/
-/*  font-weight: bold;*/
-/*  padding: 0.5rem;*/
-/*  background-color: #C3DEE6;*/
-/*  font-size: 1.2rem;*/
-/*}*/
-
-
-/*.test_login{*/
-/*    margin-right: 100px;*/
-/*}*/
