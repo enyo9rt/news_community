@@ -16,7 +16,6 @@ function set_sorting_method(sorting_item) {
     } else if (sorting_txt_selected == "최신 순") {
         sorting_status_eng = "new"
     }
-    console.log(sorting_status_eng, "sorting_status_eng")
     comments_get("", now_post_id, sorting_status_eng)
 }
 
@@ -105,7 +104,6 @@ function num2str(count) {
 
 // 댓글 리스팅
 function comments_get(user_id, post_id, sorting_status_eng) {
-    // console.log(user_id, post_id)
     if (user_id == undefined) {
         user_id = ""
     } else if (post_id == undefined) {
@@ -208,7 +206,6 @@ function bookmarked(post_id) {
         success: function (response) {
             if (response["result"] == "success") {
                 let bookmark_by_me = response["bookmark_by_me"]
-                console.log(bookmark_by_me)
                 let icon = bookmark_by_me ? "fa-bookmark" : "fa-bookmark-o"
                 let temp_html = `<div id="${post_id}" class="bookmark">
                                     <a class="level-item is-sparta" aria-label="bookmark"
@@ -225,7 +222,6 @@ function bookmarked(post_id) {
 
 // 좋아요, 좋아요 취소
 function toggle_like(comment_id) {
-    // console.log(comment_id)
     let $a_like = $(`#${comment_id} a[aria-label='like']`)
     let $i_like = $(`#${comment_id} a[aria-label='like']`).find("i")
     if ($i_like.hasClass("fa-heart")) {
@@ -237,7 +233,6 @@ function toggle_like(comment_id) {
                 action_give: "unlike"
             },
             success: function (response) {
-                console.log("unlike")
                 $i_like.addClass("fa-heart-o").removeClass("fa-heart")
                 $a_like.find("span.like-num").text(num2str(response["count"]))
             }
@@ -251,7 +246,6 @@ function toggle_like(comment_id) {
                 action_give: "like"
             },
             success: function (response) {
-                console.log("like")
                 $i_like.addClass("fa-heart").removeClass("fa-heart-o")
                 $a_like.find("span.like-num").text(num2str(response["count"]))
             }
@@ -262,9 +256,7 @@ function toggle_like(comment_id) {
 
 // 북마크, 북마크 취소
 function toggle_bookmark(post_id) {
-    console.log(post_id)
     let $i_bookmark = $(`#${post_id} a[aria-label='bookmark']`).find("i")
-    console.log($i_bookmark)
     if ($i_bookmark.hasClass("fa-bookmark")) {
         $.ajax({
             type: "POST",
@@ -274,7 +266,6 @@ function toggle_bookmark(post_id) {
                 action_give: "unbookmark"
             },
             success: function (response) {
-                console.log("unbookmark")
                 $i_bookmark.addClass("fa-bookmark-o").removeClass("fa-bookmark")
             }
         })
@@ -287,7 +278,6 @@ function toggle_bookmark(post_id) {
                 action_give: "bookmark"
             },
             success: function (response) {
-                console.log("bookmark")
                 $i_bookmark.addClass("fa-bookmark").removeClass("fa-bookmark-o")
             }
         })

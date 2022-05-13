@@ -69,7 +69,9 @@ class DetailControl():
     def like_update(comment_id_receive, action_receive):
         """ -yj
         좋아요
-        :return:확인 메시지
+        :param comment_id_receive: 좋아요 눌린 댓글 ID
+        :param action_receive: 좋아요 취소 구분을 위함
+        :return: 성공 여부, 좋아요 수
         """
         token_receive = request.cookies.get('mytoken')
         try:
@@ -92,7 +94,9 @@ class DetailControl():
     def bookmark(post_id_receive, action_receive):
         """ -yj
         북마크
-        :return:확인 메시지
+        :param post_id_receive: 북마크 눌린 기사 ID
+        :param action_receive: 북마크 취소 구분을 위함
+        :return: 성공 여부
         """
         token_receive = request.cookies.get('mytoken')
         try:
@@ -114,14 +118,17 @@ class DetailControl():
     def comments_get(user_id_receive, post_id_receive, sorting_status_receive):
         """ -yj
         DB의 comments 컬렉션에서 댓글 정보 리스트를 최근 시간 순으로 가져오기
-        :return: 댓글 리스트
+        :param user_id_receive: profile 페이지의 해당 사용자 ID
+        :param post_id_receive: 현재 사용자가 위치한 기사 ID
+        :param sorting_status_receive: 정렬 구분
+        :return: 성공 여부, 댓글 리스트
         """
         token_receive = request.cookies.get('mytoken')
         try:
             payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
             user_info = payload["id"]
 
-            # user_id가 없으면 post_id와 매칭되는 댓글 가져오기
+            # user_id가 없으면(detail 페이지의 경우) post_id와 매칭되는 댓글 전체 가져오기
             if user_id_receive == "":
                 comments = list(DetailContents.find_comments("post_id", post_id_receive).sort("date", -1).limit(20))
             else:
@@ -129,7 +136,7 @@ class DetailControl():
 
             for comment in comments:
                 comment["_id"] = str(comment["_id"])
-                # 좋아요 갯수, 여부 확인
+                # 좋아요 수, 여부 확인
                 comment["count_like"] = DetailContents.count_like(comment["_id"])
                 comment["like_by_me"] = bool(DetailContents.like_by_me("like_comment_id", comment["_id"], user_info))
                 # 내가 쓴 댓글인지 확인
@@ -143,7 +150,7 @@ class DetailControl():
             elif sorting_status_receive == "like":
                 comments = sorted(comments, key=itemgetter('count_like', 'date'), reverse=True)
 
-            return jsonify({"result": "success", "msg": "comments_get", "comments": comments})
+            return jsonify({"result": "success", "comments": comments})
         except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
             return redirect(url_for("home"))
 
@@ -151,13 +158,13 @@ class DetailControl():
     def bookmarked(post_id_receive):
         """ -yj
         북마크 여부 확인
-        :return:
+        :param post_id_receive: 현재 사용자가 위치한 기사 ID
+        :return: 성공 여부, 북마크 여부
         """
         token_receive = request.cookies.get('mytoken')
         try:
             payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
             user_info = payload["id"]
-            # 매개변수로 받은 user_id 유무에 따라 find 조건 걸어주기
             bookmark_by_me = bool(DetailContents.like_by_me("bookmark_post_id", post_id_receive, user_info))
             return jsonify({"result": "success", "bookmark_by_me": bookmark_by_me})
         except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
