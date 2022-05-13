@@ -8,6 +8,10 @@ news = client.news_data.news_data
 class DBAdmin():
     @staticmethod
     def get_mongo_connector():
+        '''
+        API_KEY를 통해 접근하는 클라우드 MONGODB에 client.Harmony 컬렉션에 대한 컨넥터를 반환해준다.
+        :return db: API_KEY를 통해 접근하는 클라우드 MONGODB에 client.Harmony 컬렉션에 대한 컨넥터
+        '''
         return db
 
 class UserAdmin():

@@ -35,12 +35,12 @@
     <script src="../static/js/profile_about.js"></script>
     <script src="../static/js/detail.js"></script>
     <script>
-        let now_user_id = "{{ user_info.user_id }}"
+        let now_user_id = "{{ user_info.user_id }}" // 현재 profile에 접근한 user_id //
         $(document).ready(function () {
+            // ./static/js/profile_about.js의 comments_get, user_id로 db에 검색해 작성한 댓글 리스트를 화면에 뿌려주는 역할까지
             comments_get('{{ user_info.user_id }}')
             var csrftoken = $('meta[name=csrf-token]').attr('content')
-            {#var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')#}
-            $.ajaxSetup({
+            $.ajaxSetup({ // CSRF 보안 인증을 위해, 서버에게 보낼 ajax 헤더에 X-CSRFToken 값을 탑재
                 beforeSend: function (xhr, settings) {
                     if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
                         xhr.setRequestHeader("X-CSRFToken", csrftoken);
@@ -108,7 +108,7 @@
                                     <label class="label" for="input-name">이름</label>
                                     <p class="control">
                                         <input id="input-name" class="input" placeholder="홍길동"
-                                               value="{{ user_info.profile_name }}">
+                                               value="{{ user_info.nick_name }}">
                                     </p>
                                 </div>
                                 <div class="field">
@@ -195,6 +195,7 @@
 </div>
 </body>
 <script>
+    // 이미지 업로드 상태 실시간 처리를 위한 js, 페이지 하단에서 벗어나지 않기를 권고
     // Select the input element using
     // document.querySelector
     var input = document.querySelector(
