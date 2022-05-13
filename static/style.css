@@ -7,12 +7,13 @@
 }
 
 .navbar_icon {
-    margin-top: -11px;
+    margin-top: -13px;
 }
 
 .navbar_icon > a > i {
     color: rgba(114, 168, 110, 0.8); !important
 }
+
 .navbar_icon > a > i:hover {
     color: #3f464d; !important
 }
@@ -129,7 +130,7 @@ a:active {
 }
 
 .ad-banner {
-    bottom: -0.2rem;
+    bottom: -2px;
 }
 
 

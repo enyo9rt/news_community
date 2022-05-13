@@ -53,16 +53,17 @@ class ProfileHandler:
     def posts_get(user_id_receive):
         """ -yj
         DB의 news_data 컬렉션에서 북마크한 기사 리스트를 최근 시간 순으로 가져오기
-        :return: 댓글 리스트
+        :param user_id_receive: 로그인한 사용자 ID
+        :return: 성공 여부, 기사 리스트
         """
         try:
-            # 매개변수로 받은 user_id가 북마크한 기사 ID를 찾아서 해당 기사들만 가져오기
+            # 해당 사용자가 북마크한 기사 ID 필드 가져오기
             bookmark_post_ids = list(DetailContents.find_bookmark_post(user_id_receive).sort("date", -1).limit(20))
             bookmarked_posts = []
             for r in bookmark_post_ids:
-                if r:
+                if r:  # 해당 컬렉션에 다른 필드도 함께 있어서 기사 ID가 있는 경우에만 기사를 찾아 넣도록 처리
                     bookmarked_posts.append(DetailContents.find_post(r["bookmark_post_id"]))
-            return jsonify({"result": "success", "msg": "posts_get", "posts": bookmarked_posts})
+            return jsonify({"result": "success", "posts": bookmarked_posts})
         except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
             return redirect(url_for("home"))
 
