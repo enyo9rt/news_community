@@ -2,13 +2,19 @@ body {
     background-color: white;
     min-height: 100vh;
     padding-top: 3.25rem;
+    font-family: 'Do Hyeon', sans-serif;
 }
 
 button {
     font-family: 'Do Hyeon', sans-serif;
 }
 
-.hero{
+hr {
+    background-color: white;
+    height: 0.5px;
+}
+
+.hero {
     padding-top: 30px;
 }
 

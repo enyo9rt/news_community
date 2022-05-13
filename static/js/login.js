@@ -10,6 +10,7 @@ $(document).ready(function () {
 
 })
 
+// 회원가입 버튼, 취소 버튼 전환
 function toggle_sign_up() {
     $("#double_ck").toggleClass("is-hidden")
     $("#undertext_id").toggleClass("is-hidden")
@@ -21,16 +22,18 @@ function toggle_sign_up() {
     console.log("toggle")
 }
 
+// 아이디 양식 확인
 function is_nickname(asValue) {
     var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
     return regExp.test(asValue);
 }
-
+// 비밀번호 양식 확인
 function is_password(asValue) {
     var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
     return regExp.test(asValue);
 }
 
+// 아이디 중복 확인
 function check_dup() {
     let username = $("#input_id").val()
     console.log(username)
@@ -65,6 +68,7 @@ function check_dup() {
     });
 }
 
+// 회원가입
 function sign_up() {
     let username = $("#input_id").val()
     let password = $("#input_pw").val()
@@ -114,6 +118,7 @@ function sign_up() {
 
 }
 
+// 로그인
 function sign_in() {
     let username = $("#input_id").val()
     let password = $("#input_pw").val()
